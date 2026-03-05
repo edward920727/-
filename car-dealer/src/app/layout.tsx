@@ -14,9 +14,37 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteTitle = "向川國際車業 River Car｜嚴選中古車與專業收購";
+const siteDescription =
+  "向川國際車業 River Car 專營嚴選中古車買賣與高價收購，以透明車況與貼心服務陪你找到最適合的一台車。";
+const siteUrl = "https://river-car.tw"; // 上線時請依實際網域調整
+
 export const metadata: Metadata = {
-  title: "City Drive Motors｜精選認證中古車行",
-  description: "City Drive Motors 提供嚴選認證中古車，透明車況與完整保固，讓您安心選購下一台愛車。",
+  title: siteTitle,
+  description: siteDescription,
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    title: siteTitle,
+    description: siteDescription,
+    url: siteUrl,
+    siteName: "向川國際車業 River Car",
+    images: [
+      {
+        url: "/og-default.svg",
+        width: 1200,
+        height: 630,
+        alt: "向川國際車業 River Car",
+      },
+    ],
+    locale: "zh_TW",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    images: ["/og-default.svg"],
+  },
 };
 
 export default function RootLayout({
@@ -42,4 +70,5 @@ export default function RootLayout({
     </html>
   );
 }
+
 

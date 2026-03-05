@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { cars } from "../data/cars";
 import { CarCard } from "../components/cars/CarCard";
 
@@ -7,72 +8,68 @@ export default function Home() {
 
   return (
     <div className="space-y-10">
-      <section className="grid gap-8 md:grid-cols-[1.4fr,1fr] md:items-center">
-        <div className="space-y-5">
-          <p className="inline-flex rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 ring-1 ring-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-200 dark:ring-emerald-800/60">
-            認證中古車 · 全車系專業保固
+      {/* 大圖 Banner */}
+      <section className="relative overflow-hidden rounded-3xl border border-zinc-200 bg-zinc-900 text-white shadow-md dark:border-zinc-800">
+        <div className="absolute inset-0">
+          <Image
+            src="/cars/bmw-3.svg"
+            alt="向川國際車業 River Car Hero"
+            fill
+            priority
+            className="object-cover opacity-80"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+        </div>
+        <div className="relative px-6 py-10 md:px-10 md:py-14 lg:py-16">
+          <p className="inline-flex rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-medium text-emerald-200 ring-1 ring-emerald-400/40">
+            向川國際車業 River Car · 嚴選中古車專門
           </p>
-          <h1 className="text-balance text-3xl font-semibold tracking-tight text-zinc-900 md:text-4xl lg:text-5xl dark:text-zinc-50">
-            找下一台理想座駕，
-            <span className="bg-gradient-to-r from-emerald-500 to-sky-500 bg-clip-text text-transparent">
-              從這裡開始
+          <h1 className="mt-4 max-w-xl text-balance text-3xl font-semibold tracking-tight md:text-4xl lg:text-5xl">
+            為你找到下一台最對味的車，
+            <span className="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">
+              從向川國際開始
             </span>
           </h1>
-          <p className="max-w-xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-400 md:text-base">
-            每一台車皆經過多重嚴格檢查，提供完整的車況報告與保固方案。不論是日常通勤、
-            家庭休旅還是熱血跑車，我們都能為你找到最適合的選擇。
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-200 md:text-base">
+            專營嚴選中古車買賣、代客尋車與高價收購，每一台車皆實車實價、公開車況，
+            讓你在預算內找到最適合自己的座駕。
           </p>
-          <div className="flex flex-wrap gap-3 pt-2">
+          <div className="mt-5 flex flex-wrap gap-3">
             <Link
               href="/cars"
-              className="inline-flex items-center justify-center rounded-full bg-zinc-900 px-6 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
+              className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-6 py-2 text-sm font-medium text-zinc-950 shadow-sm transition hover:bg-emerald-400"
             >
               瀏覽全部車款
             </Link>
-            <button className="inline-flex items-center justify-center rounded-full border border-zinc-300 px-5 py-2 text-sm font-medium text-zinc-800 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-100 dark:hover:bg-zinc-900">
-              預約賞車 / 試駕
-            </button>
+            <a
+              href="tel:0956958065"
+              className="inline-flex items-center justify-center rounded-full border border-zinc-400/70 bg-zinc-900/60 px-5 py-2 text-sm font-medium text-zinc-50 transition hover:bg-zinc-800"
+            >
+              立即來電預約賞車
+            </a>
           </div>
-          <dl className="mt-4 grid grid-cols-3 gap-3 text-xs text-zinc-600 dark:text-zinc-400 md:text-sm">
+          <dl className="mt-6 grid grid-cols-3 gap-4 text-xs text-zinc-300 md:text-sm">
             <div>
-              <dt className="font-medium text-zinc-900 dark:text-zinc-100">
-                120+
-              </dt>
+              <dt className="font-semibold text-white">120+</dt>
               <dd>項專業檢查</dd>
             </div>
             <div>
-              <dt className="font-medium text-zinc-900 dark:text-zinc-100">
-                2 年
-              </dt>
+              <dt className="font-semibold text-white">2 年</dt>
               <dd>延長保固方案</dd>
             </div>
             <div>
-              <dt className="font-medium text-zinc-900 dark:text-zinc-100">
-                7 天
-              </dt>
+              <dt className="font-semibold text-white">7 天</dt>
               <dd>猶豫期保障</dd>
             </div>
           </dl>
         </div>
-        <div className="relative">
-          <div className="absolute -inset-6 rounded-3xl bg-gradient-to-br from-sky-500/10 via-emerald-500/10 to-transparent blur-2xl" />
-          <div className="relative overflow-hidden rounded-3xl border border-zinc-200 bg-zinc-900/90 p-4 text-zinc-100 shadow-lg dark:border-zinc-800 dark:bg-zinc-900">
-            <p className="text-xs font-medium text-emerald-300">
-              今日精選車款
-            </p>
-            <div className="mt-3 grid gap-3">
-              {featuredCars.map((car) => (
-                <CarCard key={car.id} car={car} />
-              ))}
-            </div>
-          </div>
-        </div>
       </section>
 
-      <section className="space-y-4">
+      {/* 橫向滑動車輛列表 */}
+      <section className="space-y-3">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
-            熱門車款分類
+            精選車款
           </h2>
           <Link
             href="/cars"
@@ -81,29 +78,46 @@ export default function Home() {
             查看全部車輛
           </Link>
         </div>
-        <div className="grid gap-3 text-xs md:grid-cols-4 md:text-sm">
+        <div className="relative">
+          <div className="flex gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {cars.map((car) => (
+              <div key={car.id} className="w-72 flex-shrink-0 md:w-80">
+                <CarCard car={car} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+            向川國際為何值得信任？
+          </h2>
+          <Link
+            href="/intro"
+            className="text-xs font-medium text-emerald-600 hover:text-emerald-500 dark:text-emerald-300"
+          >
+            了解平台理念
+          </Link>
+        </div>
+        <div className="grid gap-3 text-xs md:grid-cols-3 md:text-sm">
           <div className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-zinc-100 dark:bg-zinc-950 dark:ring-zinc-800">
-            <p className="font-medium">通勤省油車</p>
+            <p className="font-medium">實車實價，絕不灌水</p>
             <p className="mt-1 text-zinc-500 dark:text-zinc-400">
-              入門價格、低油耗，適合每日通勤。
+              刊登車輛皆為真實在庫，價格同步現場，避免車到現場才被調高或說已售出。
             </p>
           </div>
           <div className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-zinc-100 dark:bg-zinc-950 dark:ring-zinc-800">
-            <p className="font-medium">家庭休旅 SUV</p>
+            <p className="font-medium">多重審核與車況說明</p>
             <p className="mt-1 text-zinc-500 dark:text-zinc-400">
-              大空間、高安全等級，家庭用車首選。
+              比照大型平台的審核流程，未來可補上第三方鑑定與完整車況報告，資訊透明。
             </p>
           </div>
           <div className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-zinc-100 dark:bg-zinc-950 dark:ring-zinc-800">
-            <p className="font-medium">電動 / Hybrid</p>
+            <p className="font-medium">買賣雙向專人服務</p>
             <p className="mt-1 text-zinc-500 dark:text-zinc-400">
-              兼具環保與性能的新能源車款。
-            </p>
-          </div>
-          <div className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-zinc-100 dark:bg-zinc-950 dark:ring-zinc-800">
-            <p className="font-medium">性能 / 跑車</p>
-            <p className="mt-1 text-zinc-500 dark:text-zinc-400">
-              熱血駕馭體驗，高性能車款嚴選。
+              不只協助你買車，也提供代售與收購，協助你用合理價格賣出現有愛車。
             </p>
           </div>
         </div>

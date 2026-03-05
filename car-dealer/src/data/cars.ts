@@ -11,7 +11,7 @@ export const cars: Car[] = [
     category: "sedan",
     transmission: "automatic",
     fuel: "gasoline",
-    imageUrl: "/cars/bmw-3.jpg",
+    imageUrl: "/cars/bmw-3.svg",
     highlight: true,
   },
   {
@@ -24,7 +24,7 @@ export const cars: Car[] = [
     category: "ev",
     transmission: "automatic",
     fuel: "electric",
-    imageUrl: "/cars/model-3.jpg",
+    imageUrl: "/cars/model-3.svg",
     highlight: true,
   },
   {
@@ -37,7 +37,7 @@ export const cars: Car[] = [
     category: "suv",
     transmission: "automatic",
     fuel: "hybrid",
-    imageUrl: "/cars/rav4.jpg",
+    imageUrl: "/cars/rav4.svg",
   },
   {
     id: "c4",
@@ -49,7 +49,7 @@ export const cars: Car[] = [
     category: "sedan",
     transmission: "automatic",
     fuel: "gasoline",
-    imageUrl: "/cars/c-class.jpg",
+    imageUrl: "/cars/c-class.svg",
   },
   {
     id: "c5",
@@ -61,7 +61,7 @@ export const cars: Car[] = [
     category: "sports",
     transmission: "automatic",
     fuel: "gasoline",
-    imageUrl: "/cars/911.jpg",
+    imageUrl: "/cars/911.svg",
   },
   {
     id: "c6",
@@ -73,7 +73,7 @@ export const cars: Car[] = [
     category: "truck",
     transmission: "automatic",
     fuel: "diesel",
-    imageUrl: "/cars/ranger.jpg",
+    imageUrl: "/cars/ranger.svg",
   },
 ];
 

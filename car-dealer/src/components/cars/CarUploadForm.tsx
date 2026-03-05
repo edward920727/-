@@ -134,11 +134,15 @@ export function CarUploadForm() {
       setDescription("");
       setFiles([]);
     } catch (error) {
-      console.error(error);
+      console.error("上傳或寫入 Firestore 發生錯誤：", error);
+      let message = "上傳失敗，請稍後再試一次。";
+      if (error instanceof Error && error.message.includes("Missing Firebase config")) {
+        message = "Firebase 設定有問題，請確認 .env.local 是否已正確設定並重啟專案。";
+      }
       setUploadState({
         isUploading: false,
         progress: 0,
-        error: "上傳失敗，請稍後再試一次。",
+        error: message,
       });
     }
   };

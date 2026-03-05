@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Car } from "../../types/car";
 
 interface CarCardProps {
@@ -8,10 +9,14 @@ export function CarCard({ car }: CarCardProps) {
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-950">
       <div className="relative h-44 w-full overflow-hidden bg-zinc-900">
-        {/* 實際專案可以改成 next/image 搭配真實圖片 */}
-        <div className="flex h-full items-center justify-center text-sm text-zinc-400">
-          車輛圖片預留區（{car.brand} {car.model}）
-        </div>
+        <Image
+          src={car.imageUrl}
+          alt={`${car.brand} ${car.model}`}
+          fill
+          className="object-cover transition duration-500 group-hover:scale-105 group-hover:opacity-95"
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
         {car.highlight && (
           <span className="absolute left-3 top-3 rounded-full bg-emerald-500 px-2 py-0.5 text-xs font-semibold text-white shadow">
             精選車

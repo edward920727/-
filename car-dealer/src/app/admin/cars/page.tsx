@@ -1,4 +1,5 @@
 import { CarUploadForm } from "@/components/cars/CarUploadForm";
+import { AdminCarTable } from "@/components/admin/AdminCarTable";
 
 export default function AdminCarsPage() {
   return (
@@ -17,8 +18,9 @@ export default function AdminCarsPage() {
         <CarUploadForm />
       </section>
 
-      {/* 之後可以在這裡加上「目前在庫清單」表格，從 Firestore 讀取資料 */}
+      <AdminCarTable />
     </div>
   );
 }
+
 
