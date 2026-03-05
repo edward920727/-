@@ -61,10 +61,19 @@ export default function RootLayout({
           <SiteHeader />
           <main className="flex-1">
             <div className="mx-auto max-w-6xl px-4 py-8 md:px-6 md:py-10">
-        {children}
+              {children}
             </div>
           </main>
           <SiteFooter />
+          {/* 全站固定的 LINE 客服按鈕（請將 href 換成實際官方 LINE 連結） */}
+          <a
+            href="https://line.me"
+            target="_blank"
+            rel="noreferrer"
+            className="fixed bottom-5 right-5 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500 text-xs font-semibold text-white shadow-lg ring-2 ring-emerald-300 transition hover:bg-emerald-400 md:h-14 md:w-14"
+          >
+            LINE
+          </a>
         </div>
       </body>
     </html>
