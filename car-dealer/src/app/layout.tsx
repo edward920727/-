@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteTitle = "向川國際車業 River Car｜嚴選中古車與專業收購";
+const siteTitle = "向川國際車業｜嚴選中古車與專業收購";
 const siteDescription =
-  "向川國際車業 River Car 專營嚴選中古車買賣與高價收購，以透明車況與貼心服務陪你找到最適合的一台車。";
+  "向川國際車業專營嚴選中古車買賣與高價收購，以透明車況與貼心服務陪你找到最適合的一台車。";
 const siteUrl = "https://river-car.tw"; // 上線時請依實際網域調整
 
 export const metadata: Metadata = {
@@ -27,13 +27,13 @@ export const metadata: Metadata = {
     title: siteTitle,
     description: siteDescription,
     url: siteUrl,
-    siteName: "向川國際車業 River Car",
+    siteName: "向川國際車業",
     images: [
       {
         url: "/og-default.svg",
         width: 1200,
         height: 630,
-        alt: "向川國際車業 River Car",
+        alt: "向川國際車業",
       },
     ],
     locale: "zh_TW",

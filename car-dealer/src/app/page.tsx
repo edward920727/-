@@ -1,10 +1,24 @@
+'use client';
+
 import Link from "next/link";
 import Image from "next/image";
+import { useRef } from "react";
 import { cars } from "../data/cars";
 import { CarCard } from "../components/cars/CarCard";
 
 export default function Home() {
   const featuredCars = cars.filter((car) => car.highlight);
+  const listRef = useRef<HTMLDivElement | null>(null);
+
+  const handleNext = () => {
+    if (!listRef.current) return;
+    listRef.current.scrollBy({ left: 260, behavior: "smooth" });
+  };
+
+  const handlePrev = () => {
+    if (!listRef.current) return;
+    listRef.current.scrollBy({ left: -260, behavior: "smooth" });
+  };
 
   return (
     <div className="space-y-10">
@@ -80,13 +94,30 @@ export default function Home() {
           </Link>
         </div>
         <div className="relative">
-          <div className="flex gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div
+            ref={listRef}
+            className="flex gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
             {cars.map((car) => (
               <div key={car.id} className="w-72 flex-shrink-0 md:w-80">
                 <CarCard car={car} />
               </div>
             ))}
           </div>
+          <button
+            type="button"
+            onClick={handlePrev}
+            className="absolute left-2 top-1/2 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-xs text-zinc-700 shadow-md ring-1 ring-zinc-200 hover:bg-zinc-100 dark:bg-zinc-900/90 dark:text-zinc-100 dark:ring-zinc-700 md:flex"
+          >
+            ◀
+          </button>
+          <button
+            type="button"
+            onClick={handleNext}
+            className="absolute right-2 top-1/2 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-xs text-zinc-700 shadow-md ring-1 ring-zinc-200 hover:bg-zinc-100 dark:bg-zinc-900/90 dark:text-zinc-100 dark:ring-zinc-700 md:flex"
+          >
+            ▶
+          </button>
         </div>
       </section>
 

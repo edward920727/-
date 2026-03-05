@@ -24,7 +24,7 @@ export function SiteHeader() {
           </span>
           <div className="flex flex-col">
             <span className="text-sm font-semibold tracking-wide">
-              向川國際車業 River Car
+              向川國際車業
             </span>
             <span className="text-xs text-zinc-500 dark:text-zinc-400">
               嚴選中古車 | 高價收購 | 專人代辦
@@ -43,6 +43,12 @@ export function SiteHeader() {
               {link.label}
             </Link>
           ))}
+          <Link
+            href="/admin"
+            className="ml-2 inline-flex items-center rounded-full bg-zinc-900 px-3 py-1 text-xs font-medium text-white shadow-sm transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
+          >
+            後台管理
+          </Link>
         </nav>
 
         {/* 手機版漢堡按鈕 */}
