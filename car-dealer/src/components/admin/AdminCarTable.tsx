@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
-type CarStatus = "in_stock" | "reserved" | "sold";
+type CarStatus = "in_stock" | "reserved" | "sold" | "servicing";
 
 interface AdminCar {
   id: string;
@@ -25,6 +25,7 @@ const statusLabel: Record<CarStatus, string> = {
   in_stock: "在庫",
   reserved: "已預訂",
   sold: "已售出",
+  servicing: "整備中",
 };
 
 const statusBadgeClass: Record<CarStatus, string> = {
@@ -33,10 +34,14 @@ const statusBadgeClass: Record<CarStatus, string> = {
   reserved:
     "bg-amber-500/15 text-amber-200 ring-1 ring-amber-500/40",
   sold: "bg-zinc-500/20 text-zinc-200 ring-1 ring-zinc-400/40",
+  servicing:
+    "bg-sky-500/15 text-sky-200 ring-1 ring-sky-500/40",
 };
 
 export function AdminCarTable() {
   const [cars, setCars] = useState<AdminCar[]>([]);
+  const [searchBrand, setSearchBrand] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | undefined>();
   const [updatingId, setUpdatingId] = useState<string | null>(null);
@@ -83,6 +88,15 @@ export function AdminCarTable() {
     }
   };
 
+  const filteredCars = cars.filter((car) => {
+    const matchBrand = searchBrand
+      ? car.brand.toLowerCase().includes(searchBrand.toLowerCase())
+      : true;
+    const priceLimit = Number(maxPrice.replace(/,/g, ""));
+    const matchPrice = priceLimit > 0 ? car.price <= priceLimit : true;
+    return matchBrand && matchPrice;
+  });
+
   return (
     <section className="space-y-3 rounded-2xl bg-zinc-900/60 p-4 ring-1 ring-zinc-800">
       <div className="flex items-center justify-between gap-2">
@@ -90,8 +104,29 @@ export function AdminCarTable() {
           目前車輛清單
         </h3>
         <p className="text-[11px] text-zinc-400">
-          共 {cars.length} 台（依建立時間排序）
+          共 {filteredCars.length} 台（依建立時間排序）
         </p>
+      </div>
+
+      <div className="flex flex-col gap-2 rounded-xl bg-zinc-900 px-3 py-2 text-[11px] text-zinc-200 ring-1 ring-zinc-800 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-1 gap-2">
+          <input
+            value={searchBrand}
+            onChange={(e) => setSearchBrand(e.target.value)}
+            placeholder="搜尋廠牌（例：BMW、BENZ）"
+            className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-2 py-1.5 text-[11px] outline-none placeholder:text-zinc-500 focus:border-emerald-500"
+          />
+        </div>
+        <div className="mt-1 flex items-center gap-2 md:mt-0 md:justify-end">
+          <span className="text-zinc-400">最高價格：</span>
+          <input
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(e.target.value)}
+            inputMode="numeric"
+            placeholder="例如：1000000"
+            className="w-28 rounded-lg border border-zinc-700 bg-zinc-950 px-2 py-1.5 text-[11px] outline-none placeholder:text-zinc-500 focus:border-emerald-500"
+          />
+        </div>
       </div>
 
       {loading && (
@@ -103,15 +138,15 @@ export function AdminCarTable() {
         </p>
       )}
 
-      {!loading && cars.length === 0 && (
+      {!loading && filteredCars.length === 0 && (
         <p className="text-xs text-zinc-400">
           目前尚未有任何車輛資料，請先在上方使用「新增車輛」表單建立一筆。
         </p>
       )}
 
-      {cars.length > 0 && (
+      {filteredCars.length > 0 && (
         <div className="flex flex-col gap-2 text-xs">
-          {cars.map((car) => (
+          {filteredCars.map((car) => (
             <div
               key={car.id}
               className="flex items-center justify-between gap-2 rounded-xl bg-zinc-900 px-3 py-2 ring-1 ring-zinc-800"

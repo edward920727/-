@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent, type ChangeEvent } from "react";
+import imageCompression from "browser-image-compression";
 import {
   ref,
   uploadBytesResumable,
@@ -23,6 +24,8 @@ interface UploadState {
 
 export function CarUploadForm() {
   const [brand, setBrand] = useState("");
+  const [year, setYear] = useState("");
+  const [mileage, setMileage] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [files, setFiles] = useState<File[]>([]);
@@ -41,11 +44,11 @@ export function CarUploadForm() {
     event.preventDefault();
     setUploadState({ isUploading: true, progress: 0, error: undefined, success: undefined });
 
-    if (!brand.trim() || !price.trim()) {
+    if (!brand.trim() || !year.trim() || !mileage.trim() || !price.trim()) {
       setUploadState({
         isUploading: false,
         progress: 0,
-        error: "請輸入廠牌與價格。",
+        error: "請輸入廠牌、年份、里程與價格。",
       });
       return;
     }
@@ -60,11 +63,21 @@ export function CarUploadForm() {
     }
 
     try {
-      // 1. 先將所有圖片上傳到 Firebase Storage
+      // 1. 先壓縮圖片，再上傳到 Firebase Storage
       const downloadUrls: string[] = [];
       const totalFiles = files.length;
 
-      const uploadTasks: UploadTask[] = files.map((file, index) => {
+      const compressedFiles = await Promise.all(
+        files.map((file) =>
+          imageCompression(file, {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 1600,
+            useWebWorker: true,
+          })
+        )
+      );
+
+      const uploadTasks: UploadTask[] = compressedFiles.map((file, index) => {
         const fileName = `${Date.now()}-${index}-${file.name}`;
         const storageRef = ref(storage, `cars/${fileName}`);
         const uploadTask = uploadBytesResumable(storageRef, file);
@@ -115,6 +128,8 @@ export function CarUploadForm() {
       // 2. 將車輛資訊與圖片 URL 存入 Firestore 的 cars 集合
       await addDoc(collection(db, "cars"), {
         brand: brand.trim(),
+        year: Number(year) || null,
+        mileage: Number(mileage.replace(/,/g, "")) || 0,
         price: Number(price.replace(/,/g, "")) || 0,
         description: description.trim(),
         imageUrls: downloadUrls,
@@ -130,6 +145,8 @@ export function CarUploadForm() {
 
       // 清空表單
       setBrand("");
+      setYear("");
+      setMileage("");
       setPrice("");
       setDescription("");
       setFiles([]);
@@ -165,8 +182,37 @@ export function CarUploadForm() {
           value={brand}
           onChange={(e) => setBrand(e.target.value)}
           placeholder="例如：BMW 320i"
-          className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+          className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-3 text-sm outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
         />
+      </div>
+
+      <div className="grid grid-cols-2 gap-3">
+        <div className="space-y-1.5">
+          <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400">
+            年份
+          </label>
+          <input
+            type="number"
+            inputMode="numeric"
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+            placeholder="例如：2020"
+            className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-3 text-sm outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+          />
+        </div>
+        <div className="space-y-1.5">
+          <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400">
+            里程（km）
+          </label>
+          <input
+            type="number"
+            inputMode="numeric"
+            value={mileage}
+            onChange={(e) => setMileage(e.target.value)}
+            placeholder="例如：25000"
+            className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-3 text-sm outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+          />
+        </div>
       </div>
 
       <div className="space-y-1.5">
@@ -179,7 +225,7 @@ export function CarUploadForm() {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
           placeholder="例如：1680000"
-          className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+          className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-3 text-sm outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
         />
       </div>
 
@@ -202,7 +248,7 @@ export function CarUploadForm() {
         </label>
 
         {/* 用 button + 隱藏 input，手機上比較好點 */}
-        <label className="flex min-h-[44px] cursor-pointer items-center justify-center rounded-xl border border-dashed border-emerald-400 bg-emerald-50 text-xs font-medium text-emerald-700 transition hover:bg-emerald-100 dark:border-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-200 dark:hover:bg-emerald-900/60">
+        <label className="flex min-h-[52px] cursor-pointer items-center justify-center rounded-xl border border-dashed border-emerald-400 bg-emerald-50 text-sm font-medium text-emerald-700 transition hover:bg-emerald-100 dark:border-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-200 dark:hover:bg-emerald-900/60">
           ➊ 點這裡拍照或選擇相簿（支援多張）
           <input
             type="file"
@@ -254,7 +300,7 @@ export function CarUploadForm() {
       <button
         type="submit"
         disabled={uploadState.isUploading}
-        className="flex h-11 w-full items-center justify-center rounded-full bg-zinc-900 text-sm font-medium text-white shadow-sm transition hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
+        className="flex h-12 w-full items-center justify-center rounded-full bg-zinc-900 text-sm font-medium text-white shadow-sm transition hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
       >
         {uploadState.isUploading ? "上傳中…" : "➋ 上傳並建立車輛"}
       </button>
