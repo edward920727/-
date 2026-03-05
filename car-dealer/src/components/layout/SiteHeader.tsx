@@ -16,7 +16,7 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="border-b border-zinc-200 bg-white/80 backdrop-blur dark:border-zinc-800 dark:bg-black/60">
+    <header className="relative z-50 border-b border-zinc-200 bg-white/80 backdrop-blur dark:border-zinc-800 dark:bg-black/60">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
           <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-emerald-400 text-sm font-bold text-white">
@@ -62,7 +62,7 @@ export function SiteHeader() {
 
       {/* 手機版全螢幕選單 */}
       {menuOpen && (
-        <div className="fixed inset-x-0 top-[4rem] z-40 border-t border-zinc-200 bg-white/95 pb-6 pt-3 text-sm text-zinc-800 shadow-lg backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/95 dark:text-zinc-50 md:hidden">
+        <div className="fixed inset-x-0 top-[4rem] z-50 border-t border-zinc-200 bg-white/95 pb-6 pt-3 text-sm text-zinc-800 shadow-lg backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/95 dark:text-zinc-50 md:hidden">
           <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4">
             {navLinks.map((link) => (
               <Link
