@@ -61,7 +61,7 @@ export const cars: Car[] = [
     category: "sports",
     transmission: "automatic",
     fuel: "gasoline",
-    imageUrl: "/cars/911.svg",
+    imageUrl: "https://images.unsplash.com/photo-1680530943583-9b0db80fac69?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     id: "c6",
@@ -73,7 +73,7 @@ export const cars: Car[] = [
     category: "truck",
     transmission: "automatic",
     fuel: "diesel",
-    imageUrl: "/cars/ranger.svg",
+    imageUrl: "https://images.unsplash.com/photo-1590053936004-faca6038bfec?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];
 
