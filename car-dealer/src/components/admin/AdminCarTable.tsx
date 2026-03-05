@@ -8,6 +8,7 @@ import {
   orderBy,
   updateDoc,
   doc,
+  deleteDoc,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
@@ -45,6 +46,7 @@ export function AdminCarTable() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | undefined>();
   const [updatingId, setUpdatingId] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
     const q = query(collection(db, "cars"), orderBy("createdAt", "desc"));
@@ -180,13 +182,36 @@ export function AdminCarTable() {
                       e.target.value as CarStatus
                     )
                   }
-                  disabled={updatingId === car.id}
+                  disabled={updatingId === car.id || deletingId === car.id}
                   className="rounded-full border border-zinc-700 bg-zinc-950 px-2 py-1 text-[11px] text-zinc-100"
                 >
                   <option value="in_stock">在庫</option>
                   <option value="reserved">已預訂</option>
                   <option value="sold">已售出</option>
+                  <option value="servicing">整備中</option>
                 </select>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    const ok = window.confirm(
+                      `確定要刪除「${car.brand}」這筆車輛資料嗎？此動作無法復原。`
+                    );
+                    if (!ok) return;
+                    try {
+                      setDeletingId(car.id);
+                      await deleteDoc(doc(db, "cars", car.id));
+                    } catch (err) {
+                      console.error("刪除車輛失敗：", err);
+                      setError("刪除車輛失敗，請稍後再試。");
+                    } finally {
+                      setDeletingId(null);
+                    }
+                  }}
+                  disabled={deletingId === car.id}
+                  className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-red-500/60 text-[11px] text-red-300 hover:bg-red-500/20 disabled:opacity-60"
+                >
+                  ×
+                </button>
               </div>
             </div>
           ))}

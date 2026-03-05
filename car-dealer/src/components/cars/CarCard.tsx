@@ -13,6 +13,7 @@ export function CarCard({ car }: CarCardProps) {
           src={car.imageUrl}
           alt={`${car.brand} ${car.model}`}
           fill
+          loading="lazy"
           className="object-cover transition duration-500 group-hover:scale-105 group-hover:opacity-95"
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
         />

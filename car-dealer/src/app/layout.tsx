@@ -61,7 +61,7 @@ export default function RootLayout({
           <SiteHeader />
           <main className="flex-1">
             <div className="mx-auto max-w-6xl px-4 py-8 md:px-6 md:py-10">
-              {children}
+        {children}
             </div>
           </main>
           <SiteFooter />

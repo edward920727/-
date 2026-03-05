@@ -36,8 +36,15 @@ export function CarUploadForm() {
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selected = Array.from(event.target.files ?? []);
-    setFiles(selected);
-    setUploadState((prev) => ({ ...prev, progress: 0, error: undefined, success: undefined }));
+    if (selected.length === 0) return;
+
+    setFiles((prev) => [...prev, ...selected]);
+    setUploadState((prev) => ({
+      ...prev,
+      progress: 0,
+      error: undefined,
+      success: undefined,
+    }));
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -67,15 +74,26 @@ export function CarUploadForm() {
       const downloadUrls: string[] = [];
       const totalFiles = files.length;
 
-      const compressedFiles = await Promise.all(
-        files.map((file) =>
-          imageCompression(file, {
+      // 顯示正在準備圖片
+      setUploadState((prev) => ({
+        ...prev,
+        progress: 5,
+      }));
+
+      const compressedFiles: File[] = [];
+      for (const file of files) {
+        try {
+          const compressed = await imageCompression(file, {
             maxSizeMB: 1,
             maxWidthOrHeight: 1600,
             useWebWorker: true,
-          })
-        )
-      );
+          });
+          compressedFiles.push(compressed);
+        } catch (compressError) {
+          console.error("圖片壓縮失敗，改用原始檔案：", compressError);
+          compressedFiles.push(file);
+        }
+      }
 
       const uploadTasks: UploadTask[] = compressedFiles.map((file, index) => {
         const fileName = `${Date.now()}-${index}-${file.name}`;
@@ -182,7 +200,7 @@ export function CarUploadForm() {
           value={brand}
           onChange={(e) => setBrand(e.target.value)}
           placeholder="例如：BMW 320i"
-          className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-3 text-sm outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+          className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-3 text-sm text-zinc-900 outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
         />
       </div>
 
@@ -197,7 +215,7 @@ export function CarUploadForm() {
             value={year}
             onChange={(e) => setYear(e.target.value)}
             placeholder="例如：2020"
-            className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-3 text-sm outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+            className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-3 text-sm text-zinc-900 outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
           />
         </div>
         <div className="space-y-1.5">
@@ -210,7 +228,7 @@ export function CarUploadForm() {
             value={mileage}
             onChange={(e) => setMileage(e.target.value)}
             placeholder="例如：25000"
-            className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-3 text-sm outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+            className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-3 text-sm text-zinc-900 outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
           />
         </div>
       </div>
@@ -225,7 +243,7 @@ export function CarUploadForm() {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
           placeholder="例如：1680000"
-          className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-3 text-sm outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+          className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-3 text-sm text-zinc-900 outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
         />
       </div>
 
@@ -238,7 +256,7 @@ export function CarUploadForm() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="例：車況良好、保養紀錄完整、無重大事故…"
-          className="w-full resize-none rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+          className="w-full resize-none rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
         />
       </div>
 
@@ -247,14 +265,26 @@ export function CarUploadForm() {
           車輛照片（可多張）
         </label>
 
-        {/* 用 button + 隱藏 input，手機上比較好點 */}
+        {/* 手機快速拍照 */}
         <label className="flex min-h-[52px] cursor-pointer items-center justify-center rounded-xl border border-dashed border-emerald-400 bg-emerald-50 text-sm font-medium text-emerald-700 transition hover:bg-emerald-100 dark:border-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-200 dark:hover:bg-emerald-900/60">
-          ➊ 點這裡拍照或選擇相簿（支援多張）
+          ➊ 直接拍照上傳（建議拍外觀 / 內裝 / 里程表）
           <input
             type="file"
             multiple
             accept="image/*"
             capture="environment"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+        </label>
+
+        {/* 從相簿選擇 */}
+        <label className="mt-1 flex min-h-[44px] cursor-pointer items-center justify-center rounded-xl border border-dashed border-zinc-400 bg-zinc-50 text-xs font-medium text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800">
+          ➋ 從手機相簿選擇照片
+          <input
+            type="file"
+            multiple
+            accept="image/*"
             onChange={handleFileChange}
             className="hidden"
           />

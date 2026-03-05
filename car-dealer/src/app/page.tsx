@@ -11,13 +11,14 @@ export default function Home() {
       {/* 大圖 Banner */}
       <section className="relative overflow-hidden rounded-3xl border border-zinc-200 bg-zinc-900 text-white shadow-md dark:border-zinc-800">
         <div className="absolute inset-0">
-          <Image
+        <Image
             src="/cars/bmw-3.svg"
             alt="向川國際車業 River Car Hero"
             fill
-            priority
+          priority
+            loading="eager"
             className="object-cover opacity-80"
-          />
+        />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
         </div>
         <div className="relative px-6 py-10 md:px-10 md:py-14 lg:py-16">
