@@ -28,9 +28,11 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-emerald-400 text-sm font-bold text-white shadow-[0_0_10px_rgba(52,211,153,0.0)] transition-shadow hover:shadow-[0_0_26px_rgba(52,211,153,0.9)]">
-            川
-          </span>
+          <img
+            src="/logo.svg"
+            alt="向川國際車業 Logo"
+            className="h-10 w-10 flex-shrink-0"
+          />
           <div className="flex flex-col">
             <span className="text-sm font-semibold tracking-tighter text-white">
               向川國際車業

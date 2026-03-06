@@ -1,0 +1,20 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 外層圓形背景 -->
+  <circle cx="60" cy="60" r="60" fill="#000000"/>
+  
+  <!-- 藍色抽象形狀（波浪/筆觸效果） -->
+  <path d="M20 45 Q35 35, 50 40 T80 45 Q90 50, 95 60" stroke="#1e40af" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M25 70 Q40 60, 55 65 T85 70 Q95 75, 100 85" stroke="#1e40af" stroke-width="2" fill="none" opacity="0.3"/>
+  <ellipse cx="45" cy="50" rx="15" ry="8" fill="#3b82f6" opacity="0.2"/>
+  <ellipse cx="75" cy="65" rx="12" ry="6" fill="#3b82f6" opacity="0.15"/>
+  
+  <!-- 主文字：向川國際 -->
+  <text x="60" y="50" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">向川國際</text>
+  
+  <!-- 右側小字：嚴選專古（垂直排列） -->
+  <text x="85" y="42" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="white" text-anchor="middle">嚴選</text>
+  <text x="85" y="55" font-family="Arial, sans-serif" font-size="10" font-weight="normal" fill="white" text-anchor="middle">專古</text>
+  
+  <!-- 川字後方的淡藍色光暈 -->
+  <ellipse cx="50" cy="50" rx="8" ry="12" fill="#60a5fa" opacity="0.3"/>
+</svg>

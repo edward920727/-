@@ -10,7 +10,7 @@ export function CarCard({ car }: CarCardProps) {
   const detailHref = `/cars/${car.id}`;
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border border-slate-700/70 bg-black/40 shadow-[0_0_0_1px_rgba(148,163,184,0.35)] ring-1 ring-emerald-500/0 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(16,185,129,0.55)] hover:ring-emerald-400/60">
+    <article className="group flex flex-col overflow-hidden rounded-2xl border border-slate-700/70 bg-black/40 shadow-[0_0_0_1px_rgba(148,163,184,0.35)] ring-1 ring-blue-500/0 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(59,130,246,0.55)] hover:ring-blue-400/60">
       <div className="relative h-44 w-full overflow-hidden bg-zinc-900/80">
         <Image
           src={car.imageUrl}
@@ -22,7 +22,7 @@ export function CarCard({ car }: CarCardProps) {
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
         {car.highlight && (
-          <span className="absolute left-3 top-3 rounded-full bg-emerald-500/95 px-2 py-0.5 text-xs font-semibold tracking-[0.12em] text-white shadow-[0_0_18px_rgba(52,211,153,0.9)]">
+          <span className="absolute left-3 top-3 rounded-full bg-blue-500/95 px-2 py-0.5 text-xs font-semibold tracking-[0.12em] text-white shadow-[0_0_18px_rgba(59,130,246,0.9)]">
             精選車
           </span>
         )}
@@ -38,12 +38,12 @@ export function CarCard({ car }: CarCardProps) {
             {car.transmission === "automatic" ? "自排" : "手排"}
           </p>
         </div>
-        <p className="mt-auto text-lg font-semibold tracking-tighter text-emerald-400">
+        <p className="mt-auto text-lg font-semibold tracking-tighter text-blue-400">
           NT$ {new Intl.NumberFormat("zh-TW").format(car.price)}
         </p>
         <Link
           href={detailHref}
-          className="mt-1 inline-flex items-center justify-center rounded-full bg-emerald-500/90 px-4 py-1.5 text-[11px] font-semibold tracking-[0.18em] text-zinc-950 shadow-[0_0_20px_rgba(16,185,129,0.7)] transition hover:bg-emerald-400"
+          className="mt-1 inline-flex items-center justify-center rounded-full bg-blue-500/90 px-4 py-1.5 text-[11px] font-semibold tracking-[0.18em] text-zinc-950 shadow-[0_0_20px_rgba(59,130,246,0.7)] transition hover:bg-blue-400"
         >
           查看詳細資訊
         </Link>

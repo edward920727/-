@@ -70,7 +70,7 @@ export default function RootLayout({
             href="https://line.me"
             target="_blank"
             rel="noreferrer"
-            className="fixed bottom-5 right-5 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500 text-xs font-semibold text-white shadow-lg ring-2 ring-emerald-300 transition hover:bg-emerald-400 md:h-14 md:w-14"
+            className="fixed bottom-5 right-5 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-500 text-xs font-semibold text-white shadow-lg ring-2 ring-blue-300 transition hover:bg-blue-400 md:h-14 md:w-14"
           >
             LINE
           </a>

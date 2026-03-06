@@ -173,7 +173,7 @@ export default function CarListClient() {
   return (
     <div className="space-y-6">
       <motion.header className="space-y-3" {...sectionMotionProps}>
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-emerald-400">
+        <p className="text-xs font-medium uppercase tracking-[0.2em] text-blue-400">
           Inventory
         </p>
         <h1 className="text-2xl font-semibold tracking-tighter text-zinc-50 md:text-3xl">
@@ -200,7 +200,7 @@ export default function CarListClient() {
                   onClick={() => setActiveFilter(f.key)}
                   className={`rounded-full border px-3 py-1.5 transition ${
                     active
-                      ? "border-emerald-500 bg-emerald-500 text-white shadow-sm"
+                      ? "border-blue-500 bg-blue-500 text-white shadow-sm"
                       : "border-slate-700 text-zinc-400 hover:bg-slate-900"
                   }`}
                 >
@@ -220,7 +220,7 @@ export default function CarListClient() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="輸入廠牌或車款，例如：BMW、Model 3"
-                className="w-full rounded-full border border-slate-700 bg-slate-900 px-3 py-1.5 text-xs text-zinc-100 outline-none placeholder:text-zinc-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30"
+                className="w-full rounded-full border border-slate-700 bg-slate-900 px-3 py-1.5 text-xs text-zinc-100 outline-none placeholder:text-zinc-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30"
               />
             </div>
             <div className="flex items-center gap-2 text-xs text-zinc-500">

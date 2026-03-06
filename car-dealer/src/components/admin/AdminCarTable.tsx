@@ -31,7 +31,7 @@ const statusLabel: Record<CarStatus, string> = {
 
 const statusBadgeClass: Record<CarStatus, string> = {
   in_stock:
-    "bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-500/40",
+    "bg-blue-500/15 text-blue-300 ring-1 ring-blue-500/40",
   reserved:
     "bg-amber-500/15 text-amber-200 ring-1 ring-amber-500/40",
   sold: "bg-zinc-500/20 text-zinc-200 ring-1 ring-zinc-400/40",
@@ -129,7 +129,7 @@ export function AdminCarTable() {
             value={searchBrand}
             onChange={(e) => setSearchBrand(e.target.value)}
             placeholder="搜尋廠牌（例：BMW、BENZ）"
-            className="w-full rounded-lg border border-slate-700 bg-slate-950 px-2 py-1.5 text-[11px] outline-none placeholder:text-zinc-500 focus:border-emerald-500"
+            className="w-full rounded-lg border border-slate-700 bg-slate-950 px-2 py-1.5 text-[11px] outline-none placeholder:text-zinc-500 focus:border-blue-500"
           />
         </div>
         <div className="mt-1 flex items-center gap-2 md:mt-0 md:justify-end">
@@ -139,7 +139,7 @@ export function AdminCarTable() {
             onChange={(e) => setMaxPrice(e.target.value)}
             inputMode="numeric"
             placeholder="例如：1000000"
-            className="w-28 rounded-lg border border-slate-700 bg-slate-950 px-2 py-1.5 text-[11px] outline-none placeholder:text-zinc-500 focus:border-emerald-500"
+            className="w-28 rounded-lg border border-slate-700 bg-slate-950 px-2 py-1.5 text-[11px] outline-none placeholder:text-zinc-500 focus:border-blue-500"
           />
         </div>
       </div>

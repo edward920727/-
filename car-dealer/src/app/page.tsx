@@ -103,12 +103,12 @@ export default function Home() {
           <div className="hero-smoke" />
         </div>
         <div className="relative px-6 py-10 md:px-16 md:py-20 lg:px-20 lg:py-24">
-          <p className="inline-flex rounded-full bg-emerald-500/15 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.25em] text-emerald-200 ring-1 ring-emerald-400/40">
+          <p className="inline-flex rounded-full bg-blue-500/15 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.25em] text-blue-200 ring-1 ring-blue-400/40">
             向川國際車業 River Car · 嚴選中古車專門
           </p>
           <h1 className="mt-6 max-w-lg text-balance text-3xl font-extrabold tracking-tighter text-white drop-shadow-[0_14px_40px_rgba(0,0,0,0.9)] md:text-4xl lg:text-5xl">
             為你找到下一台最對味的車，
-            <span className="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-300 to-sky-300 bg-clip-text text-transparent">
               從向川國際開始
             </span>
           </h1>
@@ -120,7 +120,7 @@ export default function Home() {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/cars"
-                className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-6 py-2 text-sm font-semibold tracking-[0.16em] text-zinc-950 shadow-[0_0_24px_rgba(16,185,129,0.8)] transition hover:bg-emerald-400"
+                className="inline-flex items-center justify-center rounded-full bg-blue-500 px-6 py-2 text-sm font-semibold tracking-[0.16em] text-zinc-950 shadow-[0_0_24px_rgba(59,130,246,0.8)] transition hover:bg-blue-400"
               >
                 瀏覽全部車款
               </Link>
@@ -138,9 +138,9 @@ export default function Home() {
           <div className="mt-14 flex justify-center md:mt-16">
             <form
               onSubmit={handleHeroSearch}
-              className="w-full max-w-4xl rounded-none border border-white/5 bg-black/75 px-6 py-4 text-xs font-medium text-gray-300 shadow-[0_0_0_1px_rgba(255,255,255,0.1)] backdrop-blur-2xl transition-all duration-300 md:flex md:items-center md:gap-2 md:rounded-[999px] md:px-10 md:text-sm md:hover:-translate-y-1"
+              className="w-full max-w-4xl rounded-none border border-white/5 bg-black/75 px-6 py-4 text-xs font-medium text-gray-300 shadow-[0_0_0_1px_rgba(255,255,255,0.1)] backdrop-blur-2xl transition-all duration-300 md:flex md:items-center md:gap-2 md:rounded-[999px] md:px-10 md:text-sm md:hover:-translate-y-1 md:ring-1 md:ring-blue-400/60"
             >
-              <div className="hidden pr-4 text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-300 md:block md:text-xs">
+              <div className="hidden pr-4 text-[11px] font-bold uppercase tracking-[0.2em] text-blue-300 md:block md:text-xs">
                 搜尋車輛
               </div>
               <div className="flex-1">
@@ -150,7 +150,7 @@ export default function Home() {
                 <select
                   value={selectedBrand}
                   onChange={(e) => setSelectedBrand(e.target.value)}
-                  className="w-full rounded-xl border border-white/5 bg-black/40 px-3 py-2 text-sm font-medium text-gray-300 outline-none ring-0 placeholder:text-gray-500 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/40"
+                  className="w-full rounded-xl border border-white/5 bg-black/40 px-3 py-2 text-sm font-medium text-gray-300 outline-none ring-0 placeholder:text-gray-500 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/40"
                 >
                   <option value="">不限品牌</option>
                   {brandOptions.map((brand) => (
@@ -194,7 +194,7 @@ export default function Home() {
               <div className="mt-3 flex w-full justify-end md:mt-0 md:w-auto">
                 <button
                   type="submit"
-                  className="inline-flex h-11 w-full items-center justify-center rounded-lg bg-gradient-to-r from-green-500 to-emerald-700 px-5 text-xs font-medium tracking-[0.18em] text-zinc-950 shadow-lg shadow-green-500/20 transition-all duration-300 hover:brightness-110 md:w-auto md:px-6 md:text-sm md:mr-1.5"
+                  className="inline-flex h-11 w-full items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-sky-700 px-5 text-xs font-medium tracking-[0.18em] text-zinc-950 shadow-lg shadow-blue-500/20 transition-all duration-300 hover:brightness-110 md:w-auto md:px-6 md:text-sm md:mr-1.5"
                 >
                   搜尋車輛
                 </button>
@@ -237,7 +237,7 @@ export default function Home() {
           </h2>
           <Link
             href="/cars"
-            className="text-xs font-medium text-emerald-600 hover:text-emerald-500 dark:text-emerald-300"
+            className="text-xs font-medium text-blue-600 hover:text-blue-500 dark:text-blue-300"
           >
             查看全部車輛
           </Link>
@@ -290,7 +290,7 @@ export default function Home() {
           </h2>
           <Link
             href="/intro"
-            className="text-xs font-medium text-emerald-600 hover:text-emerald-500 dark:text-emerald-300"
+            className="text-xs font-medium text-blue-600 hover:text-blue-500 dark:text-blue-300"
           >
             了解平台理念
           </Link>

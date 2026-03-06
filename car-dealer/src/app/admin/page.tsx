@@ -2,7 +2,7 @@ export default function AdminDashboardPage() {
   return (
     <div className="space-y-6 text-sm text-zinc-100">
       <header className="space-y-2">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-emerald-400">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-blue-400">
           Overview
         </p>
         <h2 className="text-lg font-semibold tracking-tighter text-zinc-50">
@@ -14,10 +14,10 @@ export default function AdminDashboardPage() {
       </header>
 
       <section className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-2xl border border-slate-800/80 bg-gradient-to-br from-emerald-500/18 via-slate-950/85 to-slate-950/85 p-4 shadow-[0_0_32px_rgba(15,23,42,0.9)] ring-1 ring-emerald-500/35 backdrop-blur-xl">
-          <p className="text-xs text-emerald-200">本月新增車輛</p>
-          <p className="mt-2 text-2xl font-semibold text-emerald-300">—</p>
-          <p className="mt-1 text-[11px] text-emerald-100/80">
+        <div className="rounded-2xl border border-slate-800/80 bg-gradient-to-br from-blue-500/18 via-slate-950/85 to-slate-950/85 p-4 shadow-[0_0_32px_rgba(15,23,42,0.9)] ring-1 ring-blue-500/35 backdrop-blur-xl">
+          <p className="text-xs text-blue-200">本月新增車輛</p>
+          <p className="mt-2 text-2xl font-semibold text-blue-300">—</p>
+          <p className="mt-1 text-[11px] text-blue-100/80">
             之後可接 Firestore，以 createdAt 統計本月建立的車輛數。
           </p>
         </div>

@@ -213,7 +213,7 @@ export function CarUploadForm() {
           value={brand}
           onChange={(e) => setBrand(e.target.value)}
           placeholder="例如：BMW 320i"
-          className="w-full rounded-xl border border-slate-700 bg-black/40 px-3 py-3 text-sm text-zinc-100 outline-none ring-emerald-500/40 placeholder:text-zinc-500 focus:border-emerald-500 focus:ring-2"
+          className="w-full rounded-xl border border-slate-700 bg-black/40 px-3 py-3 text-sm text-zinc-100 outline-none ring-blue-500/40 placeholder:text-zinc-500 focus:border-blue-500 focus:ring-2"
         />
       </div>
 
@@ -228,7 +228,7 @@ export function CarUploadForm() {
             value={year}
             onChange={(e) => setYear(e.target.value)}
             placeholder="例如：2020"
-            className="w-full rounded-xl border border-slate-700 bg-black/40 px-3 py-3 text-sm text-zinc-100 outline-none ring-emerald-500/40 placeholder:text-zinc-500 focus:border-emerald-500 focus:ring-2"
+            className="w-full rounded-xl border border-slate-700 bg-black/40 px-3 py-3 text-sm text-zinc-100 outline-none ring-blue-500/40 placeholder:text-zinc-500 focus:border-blue-500 focus:ring-2"
           />
         </div>
         <div className="space-y-1.5">
@@ -241,7 +241,7 @@ export function CarUploadForm() {
             value={mileage}
             onChange={(e) => setMileage(e.target.value)}
             placeholder="例如：25000"
-            className="w-full rounded-xl border border-slate-700 bg-black/40 px-3 py-3 text-sm text-zinc-100 outline-none ring-emerald-500/40 placeholder:text-zinc-500 focus:border-emerald-500 focus:ring-2"
+            className="w-full rounded-xl border border-slate-700 bg-black/40 px-3 py-3 text-sm text-zinc-100 outline-none ring-blue-500/40 placeholder:text-zinc-500 focus:border-blue-500 focus:ring-2"
           />
         </div>
       </div>
@@ -256,7 +256,7 @@ export function CarUploadForm() {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
           placeholder="例如：1680000"
-          className="w-full rounded-xl border border-slate-700 bg-black/40 px-3 py-3 text-sm text-zinc-100 outline-none ring-emerald-500/40 placeholder:text-zinc-500 focus:border-emerald-500 focus:ring-2"
+          className="w-full rounded-xl border border-slate-700 bg-black/40 px-3 py-3 text-sm text-zinc-100 outline-none ring-blue-500/40 placeholder:text-zinc-500 focus:border-blue-500 focus:ring-2"
         />
       </div>
 
@@ -269,7 +269,7 @@ export function CarUploadForm() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="例：車況良好、保養紀錄完整、無重大事故…"
-          className="w-full resize-none rounded-xl border border-slate-700 bg-black/40 px-3 py-2 text-sm text-zinc-100 outline-none ring-emerald-500/40 placeholder:text-zinc-500 focus:border-emerald-500 focus:ring-2"
+          className="w-full resize-none rounded-xl border border-slate-700 bg-black/40 px-3 py-2 text-sm text-zinc-100 outline-none ring-blue-500/40 placeholder:text-zinc-500 focus:border-blue-500 focus:ring-2"
         />
       </div>
 
@@ -279,7 +279,7 @@ export function CarUploadForm() {
         </label>
 
         {/* 手機快速拍照 */}
-        <label className="flex min-h-[52px] cursor-pointer items-center justify-center rounded-xl border border-dashed border-emerald-500/70 bg-emerald-500/10 text-sm font-medium text-emerald-200 transition hover:bg-emerald-500/20">
+        <label className="flex min-h-[52px] cursor-pointer items-center justify-center rounded-xl border border-dashed border-blue-500/70 bg-blue-500/10 text-sm font-medium text-blue-200 transition hover:bg-blue-500/20">
           ➊ 直接拍照上傳（建議拍外觀 / 內裝 / 里程表）
           <input
             type="file"
@@ -318,13 +318,13 @@ export function CarUploadForm() {
             <span className="text-zinc-400">
               上傳中…
             </span>
-            <span className="font-medium text-emerald-400">
+            <span className="font-medium text-blue-400">
               {uploadState.progress}%
             </span>
           </div>
           <div className="h-2 w-full overflow-hidden rounded-full bg-slate-900">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-sky-500 transition-[width]"
+              className="h-full rounded-full bg-gradient-to-r from-blue-500 to-sky-500 transition-[width]"
               style={{ width: `${uploadState.progress}%` }}
             />
           </div>
@@ -335,7 +335,7 @@ export function CarUploadForm() {
         <p className="text-xs text-red-500">{uploadState.error}</p>
       )}
       {uploadState.success && (
-        <p className="text-xs text-emerald-400">
+        <p className="text-xs text-blue-400">
           {uploadState.success}
         </p>
       )}
@@ -343,7 +343,7 @@ export function CarUploadForm() {
       <button
         type="submit"
         disabled={uploadState.isUploading}
-        className="flex h-12 w-full items-center justify-center rounded-full bg-emerald-500 text-sm font-semibold tracking-[0.18em] text-zinc-950 shadow-[0_0_24px_rgba(16,185,129,0.7)] transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-60"
+        className="flex h-12 w-full items-center justify-center rounded-full bg-blue-500 text-sm font-semibold tracking-[0.18em] text-zinc-950 shadow-[0_0_24px_rgba(59,130,246,0.7)] transition hover:bg-blue-400 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {uploadState.isUploading ? "上傳中…" : "➋ 上傳並建立車輛"}
       </button>

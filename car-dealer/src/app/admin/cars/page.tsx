@@ -4,7 +4,7 @@ export default function AdminCarsPage() {
   return (
     <div className="space-y-6 text-sm text-zinc-100">
       <header className="space-y-2">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-emerald-400">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-blue-400">
           Inventory
         </p>
         <h2 className="text-lg font-semibold tracking-tighter text-zinc-50">
