@@ -138,9 +138,9 @@ export default function Home() {
           <div className="mt-14 flex justify-center md:mt-16">
             <form
               onSubmit={handleHeroSearch}
-              className="w-full max-w-4xl rounded-none bg-black/75 px-4 py-4 text-xs shadow-[0_0_60px_rgba(16,185,129,0.45)] ring-1 ring-emerald-400/60 backdrop-blur-2xl md:flex md:items-end md:gap-4 md:rounded-[999px] md:px-5 md:text-sm"
+              className="w-full max-w-4xl rounded-none bg-black/75 px-5 py-4 text-xs shadow-[0_0_60px_rgba(16,185,129,0.45)] ring-1 ring-emerald-400/60 backdrop-blur-2xl md:flex md:items-center md:gap-4 md:rounded-[999px] md:px-8 md:text-sm"
             >
-              <div className="hidden pr-3 text-sm font-semibold text-emerald-300 md:block md:text-base">
+              <div className="hidden pr-4 text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-300 md:block md:text-xs">
                 搜尋車輛
               </div>
               <div className="flex-1">
@@ -150,7 +150,7 @@ export default function Home() {
                 <select
                   value={selectedBrand}
                   onChange={(e) => setSelectedBrand(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-black/40 px-3 py-2 text-xs text-white outline-none ring-0 placeholder:text-zinc-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/40"
+                  className="w-full rounded-xl border border-white/10 bg-black/40 px-3 py-2 text-[11px] text-gray-300 outline-none ring-0 placeholder:text-gray-500 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/40 md:text-sm"
                 >
                   <option value="">不限品牌</option>
                   {brandOptions.map((brand) => (
@@ -168,7 +168,7 @@ export default function Home() {
                 <select
                   value={selectedType}
                   onChange={(e) => setSelectedType(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-black/40 px-3 py-2 text-xs text-white outline-none ring-0 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/40"
+                  className="w-full rounded-xl border border-white/10 bg-black/40 px-3 py-2 text-[11px] text-gray-300 outline-none ring-0 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/40 md:text-sm"
                 >
                   <option value="all">全部車型</option>
                   <option value="sedan">轎車 Sedan</option>
@@ -187,14 +187,14 @@ export default function Home() {
                   value={keyword}
                   onChange={(e) => setKeyword(e.target.value)}
                   placeholder="輸入車款、年分或其他關鍵字"
-                  className="w-full rounded-xl border border-white/10 bg-black/40 px-3 py-2 text-xs text-white outline-none placeholder:text-zinc-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/40"
+                  className="w-full rounded-xl border border-white/10 bg-black/40 px-3 py-2 text-[11px] text-gray-300 outline-none placeholder:text-gray-500 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/40 md:text-sm"
                 />
               </div>
 
               <div className="mt-3 flex w-full justify-end md:mt-0 md:w-auto">
                 <button
                   type="submit"
-                  className="inline-flex w-full items-center justify-center rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold tracking-[0.18em] text-zinc-950 shadow-lg shadow-emerald-500/40 transition hover:bg-emerald-400 md:w-auto"
+                  className="inline-flex h-11 w-full items-center justify-center rounded-lg bg-emerald-500 px-5 text-xs font-semibold tracking-[0.18em] text-zinc-950 shadow-lg shadow-emerald-500/40 transition hover:bg-emerald-400 md:w-auto md:px-6 md:text-sm md:mr-1.5"
                 >
                   搜尋車輛
                 </button>
