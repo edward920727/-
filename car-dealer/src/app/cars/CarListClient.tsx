@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "@/lib/firebase";
@@ -142,9 +143,36 @@ export default function CarListClient() {
     return result;
   }, [activeFilter, sortBy, search, allCars]);
 
+  const sectionMotionProps = {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.2 },
+    transition: { duration: 0.7, ease: [0.22, 0.61, 0.36, 1] },
+  } as const;
+
+  const listVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.05,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.45, ease: [0.22, 0.61, 0.36, 1] },
+    },
+    exit: { opacity: 0, y: 10, transition: { duration: 0.25 } },
+  };
+
   return (
     <div className="space-y-6">
-      <header className="space-y-3">
+      <motion.header className="space-y-3" {...sectionMotionProps}>
         <p className="text-xs font-medium uppercase tracking-[0.2em] text-emerald-400">
           Inventory
         </p>
@@ -154,9 +182,12 @@ export default function CarListClient() {
         <p className="max-w-2xl text-sm text-zinc-400 md:text-base">
           目前展示中的精選車輛，皆附完整車況鑑定與里程保證。歡迎預約賞車或來電詢問最新優惠。
         </p>
-      </header>
+      </motion.header>
 
-      <section className="space-y-4 rounded-2xl border border-slate-800/80 bg-slate-950/80 p-4 shadow-[0_0_32px_rgba(15,23,42,0.9)]">
+      <motion.section
+        className="space-y-4 rounded-2xl border border-slate-800/80 bg-slate-950/80 p-4 shadow-[0_0_32px_rgba(15,23,42,0.9)]"
+        {...sectionMotionProps}
+      >
         <div className="flex flex-col gap-3 text-xs md:flex-row md:items-center md:justify-between md:text-sm">
           {/* 篩選標籤 */}
           <div className="inline-flex flex-wrap gap-2">
@@ -207,9 +238,12 @@ export default function CarListClient() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <motion.section
+        className="grid gap-4 md:grid-cols-2 lg:grid-cols-3"
+        {...sectionMotionProps}
+      >
         {loading && filteredCars.length === 0 ? (
           <p className="col-span-full text-sm text-zinc-500">
             車輛載入中…
@@ -220,16 +254,27 @@ export default function CarListClient() {
             {error && <span className="block pt-1 text-xs text-red-400">{error}</span>}
           </p>
         ) : (
-          filteredCars.map((car, index) => (
-            <div
-              key={car.id}
-              style={{ "--stagger-index": index } as React.CSSProperties}
-            >
-              <CarCard car={car} />
-            </div>
-          ))
+          <motion.div
+            variants={listVariants}
+            initial="hidden"
+            animate="visible"
+            className="contents"
+          >
+            <AnimatePresence initial={false}>
+              {filteredCars.map((car, index) => (
+                <motion.div
+                  key={car.id}
+                  variants={cardVariants}
+                  exit="exit"
+                  style={{ "--stagger-index": index } as React.CSSProperties}
+                >
+                  <CarCard car={car} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
         )}
-      </section>
+      </motion.section>
     </div>
   );
 }

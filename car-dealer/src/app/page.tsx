@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { cars } from "../data/cars";
 import { CarCard } from "../components/cars/CarCard";
@@ -54,10 +55,41 @@ export default function Home() {
     router.push(query ? `/cars?${query}` : "/cars");
   };
 
+  const sectionMotionProps = {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.2 },
+    transition: { duration: 0.7, ease: [0.22, 0.61, 0.36, 1] },
+  } as const;
+
+  const listVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.05,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.45, ease: [0.22, 0.61, 0.36, 1] },
+    },
+  };
+
   return (
     <div className="space-y-10">
-      {/* 大圖 Banner */}
-      <section className="relative overflow-hidden rounded-3xl border border-slate-800/80 bg-gradient-to-br from-slate-950 via-slate-950 to-slate-900 text-white shadow-[0_0_40px_rgba(15,23,42,0.9)]">
+      <AnimatePresence>
+        {/* 大圖 Banner */}
+        <motion.section
+          key="hero"
+          className="relative overflow-hidden rounded-3xl border border-slate-800/80 bg-gradient-to-br from-slate-950 via-slate-950 to-slate-900 text-white shadow-[0_0_40px_rgba(15,23,42,0.9)]"
+          {...sectionMotionProps}
+        >
         <div className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1283&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -65,16 +97,16 @@ export default function Home() {
             fill
             priority
             loading="eager"
-            className="hero-zoom image-stagger object-cover opacity-80"
+            className="hero-zoom image-stagger object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
           <div className="hero-smoke" />
         </div>
         <div className="relative px-6 py-10 md:px-16 md:py-20 lg:px-20 lg:py-24">
           <p className="inline-flex rounded-full bg-emerald-500/15 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.25em] text-emerald-200 ring-1 ring-emerald-400/40">
             向川國際車業 River Car · 嚴選中古車專門
           </p>
-          <h1 className="mt-6 max-w-lg text-balance text-3xl font-semibold tracking-tighter md:text-4xl lg:text-5xl">
+          <h1 className="mt-6 max-w-lg text-balance text-3xl font-extrabold tracking-tighter text-white drop-shadow-[0_14px_40px_rgba(0,0,0,0.9)] md:text-4xl lg:text-5xl">
             為你找到下一台最對味的車，
             <span className="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">
               從向川國際開始
@@ -85,18 +117,22 @@ export default function Home() {
             讓你在預算內找到最適合自己的座駕。
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/cars"
-              className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-6 py-2 text-sm font-semibold tracking-[0.16em] text-zinc-950 shadow-[0_0_24px_rgba(16,185,129,0.8)] transition hover:bg-emerald-400"
-            >
-              瀏覽全部車款
-            </Link>
-            <a
-              href="tel:0956958065"
-              className="inline-flex items-center justify-center rounded-full border border-zinc-500/60 bg-black/40 px-5 py-2 text-sm font-medium tracking-[0.16em] text-zinc-50 transition hover:bg-zinc-900/70"
-            >
-              立即來電預約賞車
-            </a>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link
+                href="/cars"
+                className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-6 py-2 text-sm font-semibold tracking-[0.16em] text-zinc-950 shadow-[0_0_24px_rgba(16,185,129,0.8)] transition hover:bg-emerald-400"
+              >
+                瀏覽全部車款
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <a
+                href="tel:0956958065"
+                className="inline-flex items-center justify-center rounded-full border border-zinc-500/60 bg-black/40 px-5 py-2 text-sm font-medium tracking-[0.16em] text-zinc-50 transition hover:bg-zinc-900/70"
+              >
+                立即來電預約賞車
+              </a>
+            </motion.div>
           </div>
           {/* 大圖中間的搜尋車輛區塊（加強視覺重點） */}
           <div className="mt-14 flex justify-center md:mt-16">
@@ -187,10 +223,14 @@ export default function Home() {
             </div>
           </dl>
         </div>
-      </section>
+        </motion.section>
 
-      {/* 橫向滑動車輛列表 */}
-      <section className="space-y-3">
+        {/* 橫向滑動車輛列表 */}
+        <motion.section
+          key="featured"
+          className="space-y-3"
+          {...sectionMotionProps}
+        >
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold tracking-tighter text-zinc-50">
             精選車款
@@ -203,20 +243,25 @@ export default function Home() {
           </Link>
         </div>
         <div className="relative">
-          <div
+          <motion.div
             ref={listRef}
+            variants={listVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
             className="flex gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {cars.map((car, index) => (
-              <div
+              <motion.div
                 key={car.id}
+                variants={cardVariants}
                 className="w-72 flex-shrink-0 md:w-80"
                 style={{ "--stagger-index": index } as React.CSSProperties}
               >
                 <CarCard car={car} />
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
           <button
             type="button"
             onClick={handlePrev}
@@ -232,9 +277,13 @@ export default function Home() {
             ▶
           </button>
         </div>
-      </section>
+        </motion.section>
 
-      <section className="space-y-4">
+        <motion.section
+          key="trust"
+          className="space-y-4"
+          {...sectionMotionProps}
+        >
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold tracking-tighter text-zinc-50">
             向川國際為何值得信任？
@@ -272,7 +321,8 @@ export default function Home() {
             </p>
           </div>
         </div>
-      </section>
+        </motion.section>
+      </AnimatePresence>
     </div>
   );
 }

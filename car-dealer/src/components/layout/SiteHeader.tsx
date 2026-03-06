@@ -1,43 +1,60 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { navLinks } from "../../data/navLinks";
 
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="relative z-50 border-b border-slate-800/70 bg-slate-950/80 backdrop-blur-xl">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-colors ${
+        scrolled
+          ? "border-b border-white/10 bg-black/60 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
+      }`}
+    >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-emerald-400 text-sm font-bold text-white shadow-[0_0_18px_rgba(52,211,153,0.7)]">
+          <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-emerald-400 text-sm font-bold text-white shadow-[0_0_10px_rgba(52,211,153,0.0)] transition-shadow hover:shadow-[0_0_26px_rgba(52,211,153,0.9)]">
             川
           </span>
           <div className="flex flex-col">
-            <span className="text-sm font-semibold tracking-tighter text-zinc-100">
+            <span className="text-sm font-semibold tracking-tighter text-white">
               向川國際車業
             </span>
-            <span className="text-xs text-zinc-400">
+            <span className="text-xs text-zinc-300">
               嚴選中古車 | 高價收購 | 專人代辦
             </span>
           </div>
         </Link>
 
         {/* 桌機版導覽 */}
-        <nav className="hidden items-center gap-3 text-xs font-medium text-zinc-300 md:flex md:text-sm md:gap-5">
+        <nav className="hidden items-center gap-3 text-xs font-medium text-zinc-100 md:flex md:text-sm md:gap-5">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-full px-3 py-1 uppercase tracking-[0.16em] text-zinc-400 transition-colors hover:bg-zinc-900/70 hover:text-zinc-100"
+              className="rounded-full px-3 py-1 uppercase tracking-[0.16em] text-zinc-200 transition-colors hover:bg-white/10 hover:text-white"
             >
               {link.label}
             </Link>
           ))}
           <Link
             href="/admin"
-            className="ml-2 inline-flex items-center rounded-full bg-zinc-900 px-3 py-1 text-xs font-medium text-white shadow-sm transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
+            className="ml-2 inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white shadow-sm transition hover:bg-white/20"
           >
             後台管理
           </Link>
@@ -47,7 +64,7 @@ export function SiteHeader() {
         <button
           type="button"
           onClick={() => setMenuOpen((open) => !open)}
-          className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-900/80 text-xs text-zinc-100 shadow-sm transition hover:bg-slate-800 md:hidden"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/40 text-xs text-zinc-100 shadow-sm transition hover:bg-white/10 md:hidden"
           aria-label="開啟主選單"
         >
           <span className="sr-only">開啟主選單</span>
