@@ -44,6 +44,13 @@ export default function CarListPage() {
   }, [searchParams, search, activeFilter]);
 
   useEffect(() => {
+    // 若尚未設定 Firebase（db 為 null），就直接使用本地示範資料
+    if (!db) {
+      setLoading(false);
+      setError("尚未設定 Firebase，僅顯示示範車輛。");
+      return;
+    }
+
     const q = query(collection(db, "cars"), orderBy("createdAt", "desc"));
 
     const unsub = onSnapshot(

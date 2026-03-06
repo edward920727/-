@@ -21,11 +21,15 @@ const firebaseConfig = {
 };
 
 // 避免在開發環境 hot reload 時重複初始化
-function createFirebaseApp(): FirebaseApp {
+function createFirebaseApp(): FirebaseApp | null {
   if (!firebaseConfig.apiKey) {
-    throw new Error(
-      "Missing Firebase config. Please check your .env.local file."
-    );
+    // 在沒有設定 Firebase 環境變數時，不要讓 build 壞掉，僅在執行時關閉雲端功能
+    if (process.env.NODE_ENV !== "production") {
+      console.warn(
+        "Firebase 環境變數未設定，線上資料功能將停用（僅使用本地示範資料）。"
+      );
+    }
+    return null;
   }
 
   if (getApps().length > 0) {
@@ -39,7 +43,7 @@ const app = createFirebaseApp();
 
 // Analytics 僅在瀏覽器端可用，避免在 SSR / Node 環境觸發錯誤
 let analytics: Analytics | undefined;
-if (typeof window !== "undefined") {
+if (typeof window !== "undefined" && app) {
   try {
     analytics = getAnalytics(app);
   } catch {
@@ -47,8 +51,8 @@ if (typeof window !== "undefined") {
   }
 }
 
-export const db: Firestore = getFirestore(app);
-export const storage: FirebaseStorage = getStorage(app);
+export const db: Firestore | null = app ? getFirestore(app) : null;
+export const storage: FirebaseStorage | null = app ? getStorage(app) : null;
 export { analytics };
 export default app;
 
