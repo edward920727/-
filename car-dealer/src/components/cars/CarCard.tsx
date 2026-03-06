@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Car } from "../../types/car";
 
 interface CarCardProps {
@@ -6,6 +7,8 @@ interface CarCardProps {
 }
 
 export function CarCard({ car }: CarCardProps) {
+  const detailHref = `/cars/${car.id}`;
+
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-950">
       <div className="relative h-44 w-full overflow-hidden bg-zinc-900">
@@ -38,9 +41,12 @@ export function CarCard({ car }: CarCardProps) {
         <p className="mt-auto text-lg font-semibold text-emerald-600 dark:text-emerald-400">
           NT$ {new Intl.NumberFormat("zh-TW").format(car.price)}
         </p>
-        <button className="mt-1 inline-flex items-center justify-center rounded-full bg-zinc-900 px-4 py-1.5 text-xs font-medium text-white transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white">
+        <Link
+          href={detailHref}
+          className="mt-1 inline-flex items-center justify-center rounded-full bg-zinc-900 px-4 py-1.5 text-xs font-medium text-white transition hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
+        >
           查看詳細資訊
-        </button>
+        </Link>
       </div>
     </article>
   );

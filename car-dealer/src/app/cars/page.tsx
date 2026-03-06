@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { cars as seedCars } from "../../data/cars";
@@ -20,12 +21,27 @@ const filterDefs: { key: FilterKey; label: string }[] = [
 ];
 
 export default function CarListPage() {
+  const searchParams = useSearchParams();
   const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
   const [sortBy, setSortBy] = useState<SortOption>("price-asc");
   const [search, setSearch] = useState("");
   const [remoteCars, setRemoteCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // 從網址列帶入預設搜尋與篩選條件（例如從首頁大圖搜尋過來）
+  useEffect(() => {
+    const q = searchParams.get("q") ?? "";
+    const type = searchParams.get("type") as FilterKey | null;
+
+    if (q && q !== search) {
+      setSearch(q);
+    }
+
+    if (type && filterDefs.some((f) => f.key === type) && type !== activeFilter) {
+      setActiveFilter(type);
+    }
+  }, [searchParams, search, activeFilter]);
 
   useEffect(() => {
     const q = query(collection(db, "cars"), orderBy("createdAt", "desc"));
