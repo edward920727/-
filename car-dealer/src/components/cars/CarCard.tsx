@@ -1,6 +1,9 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
 import type { Car } from "../../types/car";
+import { useTheme } from "../../contexts/ThemeContext";
 
 interface CarCardProps {
   car: Car;
@@ -8,9 +11,33 @@ interface CarCardProps {
 
 export function CarCard({ car }: CarCardProps) {
   const detailHref = `/cars/${car.id}`;
+  const { currentTheme } = useTheme();
+  const isLight = currentTheme === "light";
+
+  const cardBase =
+    "group flex flex-col overflow-hidden rounded-2xl transition hover:-translate-y-1";
+  const cardTheme = isLight
+    ? "border border-gray-200 bg-white text-gray-900 shadow-[0_18px_45px_rgba(15,23,42,0.12)]"
+    : "border border-slate-700/70 bg-black/40 text-zinc-50 shadow-[0_0_0_1px_rgba(148,163,184,0.35)] ring-1 ring-blue-500/0 backdrop-blur-xl hover:shadow-[0_0_40px_rgba(59,130,246,0.55)] hover:ring-blue-400/60";
+
+  const titleClass = isLight
+    ? "text-base font-semibold tracking-tighter text-gray-900"
+    : "text-base font-semibold tracking-tighter text-zinc-50";
+
+  const metaClass = isLight
+    ? "text-xs text-gray-500"
+    : "text-xs text-zinc-400";
+
+  const priceClass = isLight
+    ? "mt-auto text-lg font-semibold tracking-tighter text-blue-600"
+    : "mt-auto text-lg font-semibold tracking-tighter text-blue-400";
+
+  const buttonClass = isLight
+    ? "mt-1 inline-flex items-center justify-center rounded-full bg-blue-600 px-4 py-1.5 text-[11px] font-semibold tracking-[0.18em] text-white shadow-[0_0_18px_rgba(37,99,235,0.5)] transition hover:bg-blue-500"
+    : "mt-1 inline-flex items-center justify-center rounded-full bg-blue-500/90 px-4 py-1.5 text-[11px] font-semibold tracking-[0.18em] text-zinc-950 shadow-[0_0_20px_rgba(59,130,246,0.7)] transition hover:bg-blue-400";
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border border-slate-700/70 bg-black/40 shadow-[0_0_0_1px_rgba(148,163,184,0.35)] ring-1 ring-blue-500/0 backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(59,130,246,0.55)] hover:ring-blue-400/60">
+    <article className={`${cardBase} ${cardTheme}`}>
       <div className="relative h-44 w-full overflow-hidden bg-zinc-900/80">
         <Image
           src={car.imageUrl}
@@ -29,21 +56,21 @@ export function CarCard({ car }: CarCardProps) {
       </div>
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div>
-          <h3 className="text-base font-semibold tracking-tighter text-zinc-50">
+          <h3 className={titleClass}>
             {car.brand} {car.model}
           </h3>
-          <p className="text-xs text-zinc-400">
+          <p className={metaClass}>
             {car.year} ·{" "}
             {new Intl.NumberFormat("zh-TW").format(car.mileage)} km ·{" "}
             {car.transmission === "automatic" ? "自排" : "手排"}
           </p>
         </div>
-        <p className="mt-auto text-lg font-semibold tracking-tighter text-blue-400">
+        <p className={priceClass}>
           NT$ {new Intl.NumberFormat("zh-TW").format(car.price)}
         </p>
         <Link
           href={detailHref}
-          className="mt-1 inline-flex items-center justify-center rounded-full bg-blue-500/90 px-4 py-1.5 text-[11px] font-semibold tracking-[0.18em] text-zinc-950 shadow-[0_0_20px_rgba(59,130,246,0.7)] transition hover:bg-blue-400"
+          className={buttonClass}
         >
           查看詳細資訊
         </Link>
