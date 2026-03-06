@@ -4,7 +4,13 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const navItems = [
+type AdminNavItem = {
+  href: string;
+  label: string;
+  badge?: string;
+};
+
+const navItems: AdminNavItem[] = [
   { href: "/admin", label: "儀表板" },
   { href: "/admin/cars", label: "車輛建檔" },
   { href: "/admin/inventory", label: "目前車輛清單" },
