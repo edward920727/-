@@ -219,7 +219,7 @@ export default function CarDetailPage() {
           <div className="flex flex-wrap gap-3 pt-3">
             <a
               href="tel:0956958065"
-              className="inline-flex flex-1 items-center justify-center rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-400 md:flex-none md:px-6"
+              className="inline-flex flex-1 items-center justify-center rounded-full bg-blue-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-400 md:flex-none md:px-6"
             >
               電話洽詢 / 預約賞車
             </a>

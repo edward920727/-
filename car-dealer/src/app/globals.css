@@ -19,6 +19,9 @@ body {
   /* 使用 Next Font 設定的字體變數，fallback 為系統字體 */
   font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
+  /* 平滑的主題切換過渡效果（類似保時捷官網） */
+  transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* 標題統一視覺：全部大寫 + tracking-tighter 感受（負 letter-spacing） */

@@ -3,11 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { cars } from "../data/cars";
 import { CarCard } from "../components/cars/CarCard";
 import { navLinks } from "../data/navLinks";
+import { ThemeSection } from "../components/layout/ThemeSection";
 
 export default function Home() {
   const router = useRouter();
@@ -83,13 +84,13 @@ export default function Home() {
 
   return (
     <div className="space-y-10">
-      <AnimatePresence>
-        {/* 大圖 Banner */}
-        <motion.section
-          key="hero"
-          className="relative overflow-hidden rounded-3xl border border-slate-800/80 bg-gradient-to-br from-slate-950 via-slate-950 to-slate-900 text-white shadow-[0_0_40px_rgba(15,23,42,0.9)]"
-          {...sectionMotionProps}
-        >
+      {/* 大圖 Banner - 深色主題區塊 */}
+      <ThemeSection theme="dark" threshold={0.2}>
+          <motion.section
+            key="hero"
+            className="relative overflow-hidden rounded-3xl border border-slate-800/80 bg-gradient-to-br from-slate-950 via-slate-950 to-slate-900 text-white shadow-[0_0_40px_rgba(15,23,42,0.9)]"
+            {...sectionMotionProps}
+          >
         <div className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1283&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -168,7 +169,7 @@ export default function Home() {
                 <select
                   value={selectedType}
                   onChange={(e) => setSelectedType(e.target.value)}
-                  className="w-full rounded-xl border border-white/5 bg-black/40 px-3 py-2 text-sm font-medium text-gray-300 outline-none ring-0 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/40"
+                  className="w-full rounded-xl border border-white/5 bg-black/40 px-3 py-2 text-sm font-medium text-gray-300 outline-none ring-0 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/40"
                 >
                   <option value="all">全部車型</option>
                   <option value="sedan">轎車 Sedan</option>
@@ -187,7 +188,7 @@ export default function Home() {
                   value={keyword}
                   onChange={(e) => setKeyword(e.target.value)}
                   placeholder="輸入車款、年分或其他關鍵字"
-                  className="w-full rounded-xl border border-white/5 bg-black/40 px-3 py-2 text-sm font-medium text-gray-300 outline-none placeholder:text-gray-500 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/40"
+                  className="w-full rounded-xl border border-white/5 bg-black/40 px-3 py-2 text-sm font-medium text-gray-300 outline-none placeholder:text-gray-500 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/40"
                 />
               </div>
 
@@ -224,13 +225,15 @@ export default function Home() {
           </dl>
         </div>
         </motion.section>
+        </ThemeSection>
 
-        {/* 橫向滑動車輛列表 */}
-        <motion.section
-          key="featured"
-          className="space-y-3"
-          {...sectionMotionProps}
-        >
+      {/* 橫向滑動車輛列表 - 深色主題 */}
+      <ThemeSection theme="dark" threshold={0.2}>
+          <motion.section
+            key="featured"
+            className="space-y-3"
+            {...sectionMotionProps}
+          >
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold tracking-tighter text-zinc-50">
             精選車款
@@ -277,52 +280,55 @@ export default function Home() {
             ▶
           </button>
         </div>
-        </motion.section>
+          </motion.section>
+        </ThemeSection>
 
-        <motion.section
-          key="trust"
-          className="space-y-4"
-          {...sectionMotionProps}
-        >
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold tracking-tighter text-zinc-50">
-            向川國際為何值得信任？
-          </h2>
-          <Link
-            href="/intro"
-            className="text-xs font-medium text-blue-600 hover:text-blue-500 dark:text-blue-300"
+      {/* 示範：淺色主題區塊（當滾動到此區塊時，背景會切換為白色） */}
+      <ThemeSection theme="light" threshold={0.3}>
+          <motion.section
+            key="trust"
+            className="space-y-4 py-20"
+            {...sectionMotionProps}
           >
-            了解平台理念
-          </Link>
-        </div>
-        <div className="grid gap-3 text-xs md:grid-cols-3 md:text-sm">
-          <div className="rounded-2xl border border-slate-800/80 bg-slate-950/80 p-4 shadow-[0_0_24px_rgba(15,23,42,0.9)]">
-            <p className="font-medium tracking-tighter text-zinc-50">
-              實車實價，絕不灌水
-            </p>
-            <p className="mt-1 text-zinc-400">
-              刊登車輛皆為真實在庫，價格同步現場，避免車到現場才被調高或說已售出。
-            </p>
-          </div>
-          <div className="rounded-2xl border border-slate-800/80 bg-slate-950/80 p-4 shadow-[0_0_24px_rgba(15,23,42,0.9)]">
-            <p className="font-medium tracking-tighter text-zinc-50">
-              多重審核與車況說明
-            </p>
-            <p className="mt-1 text-zinc-400">
-              比照大型平台的審核流程，未來可補上第三方鑑定與完整車況報告，資訊透明。
-            </p>
-          </div>
-          <div className="rounded-2xl border border-slate-800/80 bg-slate-950/80 p-4 shadow-[0_0_24px_rgba(15,23,42,0.9)]">
-            <p className="font-medium tracking-tighter text-zinc-50">
-              買賣雙向專人服務
-            </p>
-            <p className="mt-1 text-zinc-400">
-              不只協助你買車，也提供代售與收購，協助你用合理價格賣出現有愛車。
-            </p>
-          </div>
-        </div>
-        </motion.section>
-      </AnimatePresence>
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold tracking-tighter">
+                向川國際為何值得信任？
+              </h2>
+              <Link
+                href="/intro"
+                className="text-xs font-medium text-blue-600 hover:text-blue-500"
+              >
+                了解平台理念
+              </Link>
+            </div>
+            <div className="grid gap-3 text-xs md:grid-cols-3 md:text-sm">
+              <div className="rounded-2xl border border-gray-200 bg-white/90 p-4 shadow-lg">
+                <p className="font-medium tracking-tighter text-gray-900">
+                  實車實價，絕不灌水
+                </p>
+                <p className="mt-1 text-gray-600">
+                  刊登車輛皆為真實在庫，價格同步現場，避免車到現場才被調高或說已售出。
+                </p>
+              </div>
+              <div className="rounded-2xl border border-gray-200 bg-white/90 p-4 shadow-lg">
+                <p className="font-medium tracking-tighter text-gray-900">
+                  多重審核與車況說明
+                </p>
+                <p className="mt-1 text-gray-600">
+                  比照大型平台的審核流程，未來可補上第三方鑑定與完整車況報告，資訊透明。
+                </p>
+              </div>
+              <div className="rounded-2xl border border-gray-200 bg-white/90 p-4 shadow-lg">
+                <p className="font-medium tracking-tighter text-gray-900">
+                  買賣雙向專人服務
+                </p>
+                <p className="mt-1 text-gray-600">
+                  不只協助你買車，也提供代售與收購，協助你用合理價格賣出現有愛車。
+                </p>
+              </div>
+            </div>
+          </motion.section>
+        </ThemeSection>
     </div>
   );
 }

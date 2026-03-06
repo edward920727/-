@@ -20,7 +20,7 @@ export function SiteFooter() {
               href="https://line.me"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1 rounded-full bg-blue-500/90 px-3 py-1 text-[11px] font-medium text-white shadow-[0_0_18px_rgba(59,130,246,0.7)] transition hover:bg-blue-400/90"
+              className="inline-flex items-center gap-1 rounded-full bg-emerald-500/90 px-3 py-1 text-[11px] font-medium text-white shadow-[0_0_18px_rgba(52,211,153,0.7)] transition hover:bg-emerald-400/90"
             >
               <span>LINE</span>
             </a>
