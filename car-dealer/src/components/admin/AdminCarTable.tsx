@@ -210,9 +210,16 @@ export function AdminCarTable() {
                       `確定要刪除「${car.brand}」這筆車輛資料嗎？此動作無法復原。`
                     );
                     if (!ok) return;
+
+                    const dbRef = db;
+                    if (!dbRef) {
+                      setError("尚未設定 Firebase，無法刪除車輛資料。");
+                      return;
+                    }
+
                     try {
                       setDeletingId(car.id);
-                      await deleteDoc(doc(db, "cars", car.id));
+                      await deleteDoc(doc(dbRef, "cars", car.id));
                     } catch (err) {
                       console.error("刪除車輛失敗：", err);
                       setError("刪除車輛失敗，請稍後再試。");
