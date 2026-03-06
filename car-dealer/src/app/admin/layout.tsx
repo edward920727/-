@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation";
 
 const navItems = [
   { href: "/admin", label: "儀表板" },
-  { href: "/admin/cars", label: "車輛管理", badge: "新" },
+  { href: "/admin/cars", label: "車輛建檔" },
+  { href: "/admin/inventory", label: "目前車輛清單" },
 ];
 
 export default function AdminLayout({ children }: { children: ReactNode }) {

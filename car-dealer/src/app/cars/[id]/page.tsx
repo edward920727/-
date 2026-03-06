@@ -37,12 +37,13 @@ export default function CarDetailPage() {
 
     // 再嘗試從 Firestore 取回最新資料（如果有的話就覆蓋本地的）
     const loadRemote = async () => {
-      if (!db) {
+      const dbRef = db;
+      if (!dbRef) {
         // 沒有設定 Firebase，就只顯示本地示範資料
         return;
       }
       try {
-        const ref = doc(db, "cars", id);
+        const ref = doc(dbRef, "cars", id);
         const snap = await getDoc(ref);
         if (snap.exists()) {
           const d = snap.data() as any;

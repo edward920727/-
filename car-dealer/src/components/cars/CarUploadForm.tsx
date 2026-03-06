@@ -69,6 +69,19 @@ export function CarUploadForm() {
       return;
     }
 
+    // 若尚未設定 Firebase，直接提示錯誤
+    const dbRef = db;
+    const storageRefRoot = storage;
+    if (!dbRef || !storageRefRoot) {
+      setUploadState({
+        isUploading: false,
+        progress: 0,
+        error:
+          "尚未設定 Firebase 連線，無法上傳圖片與建立車輛，請先完成環境變數設定。",
+      });
+      return;
+    }
+
     try {
       // 1. 先壓縮圖片，再上傳到 Firebase Storage
       const downloadUrls: string[] = [];
@@ -97,7 +110,7 @@ export function CarUploadForm() {
 
       const uploadTasks: UploadTask[] = compressedFiles.map((file, index) => {
         const fileName = `${Date.now()}-${index}-${file.name}`;
-        const storageRef = ref(storage, `cars/${fileName}`);
+        const storageRef = ref(storageRefRoot, `cars/${fileName}`);
         const uploadTask = uploadBytesResumable(storageRef, file);
 
         uploadTask.on("state_changed", (snapshot) => {
@@ -144,7 +157,7 @@ export function CarUploadForm() {
       downloadUrls.push(...uploadResults);
 
       // 2. 將車輛資訊與圖片 URL 存入 Firestore 的 cars 集合
-      await addDoc(collection(db, "cars"), {
+      await addDoc(collection(dbRef, "cars"), {
         brand: brand.trim(),
         year: Number(year) || null,
         mileage: Number(mileage.replace(/,/g, "")) || 0,

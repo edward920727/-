@@ -49,7 +49,15 @@ export function AdminCarTable() {
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
-    const q = query(collection(db, "cars"), orderBy("createdAt", "desc"));
+    const dbRef = db;
+
+    if (!dbRef) {
+      setLoading(false);
+      setError("尚未設定 Firebase，無法載入線上車輛清單。");
+      return;
+    }
+
+    const q = query(collection(dbRef, "cars"), orderBy("createdAt", "desc"));
 
     const unsub = onSnapshot(
       q,
@@ -79,9 +87,14 @@ export function AdminCarTable() {
   }, []);
 
   const handleChangeStatus = async (id: string, status: CarStatus) => {
+    const dbRef = db;
+    if (!dbRef) {
+      setError("尚未設定 Firebase，無法更新車輛狀態。");
+      return;
+    }
     try {
       setUpdatingId(id);
-      await updateDoc(doc(db, "cars", id), { status });
+      await updateDoc(doc(dbRef, "cars", id), { status });
     } catch (err) {
       console.error("更新車輛狀態失敗：", err);
       setError("更新車輛狀態失敗，請稍後再試。");
