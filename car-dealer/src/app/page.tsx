@@ -138,7 +138,7 @@ export default function Home() {
           <div className="mt-14 flex justify-center md:mt-16">
             <form
               onSubmit={handleHeroSearch}
-              className="w-full max-w-4xl rounded-[999px] bg-black/75 px-5 py-4 text-xs shadow-[0_0_60px_rgba(16,185,129,0.45)] ring-1 ring-emerald-400/60 backdrop-blur-2xl md:flex md:items-end md:gap-4 md:text-sm"
+              className="w-full max-w-4xl rounded-none bg-black/75 px-4 py-4 text-xs shadow-[0_0_60px_rgba(16,185,129,0.45)] ring-1 ring-emerald-400/60 backdrop-blur-2xl md:flex md:items-end md:gap-4 md:rounded-[999px] md:px-5 md:text-sm"
             >
               <div className="hidden pr-3 text-sm font-semibold text-emerald-300 md:block md:text-base">
                 搜尋車輛

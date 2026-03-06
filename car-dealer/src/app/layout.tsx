@@ -59,7 +59,7 @@ export default function RootLayout({
       >
         <div className="flex min-h-screen flex-col bg-slate-950 text-zinc-100">
           <SiteHeader />
-          <main className="flex-1">
+          <main className="flex-1 pt-16 md:pt-20">
             <div className="mx-auto max-w-6xl px-4 py-8 md:px-6 md:py-10">
               {children}
             </div>
