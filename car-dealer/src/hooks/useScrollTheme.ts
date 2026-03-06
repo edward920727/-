@@ -33,10 +33,10 @@ interface UseScrollThemeOptions {
  * return <section ref={sectionRef}>...</section>
  * ```
  */
-export function useScrollTheme(options: UseScrollThemeOptions = {}): RefObject<HTMLElement> {
+export function useScrollTheme(options: UseScrollThemeOptions = {}): RefObject<HTMLElement | null> {
   const { theme = 'dark', threshold = 0.3, rootMargin = '0px' } = options;
   const { setCurrentTheme } = useTheme();
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const element = ref.current;

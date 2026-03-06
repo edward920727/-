@@ -61,7 +61,7 @@ export function ThemeSection({
 
   return (
     <section
-      ref={sectionRef as React.RefObject<HTMLElement>}
+      ref={sectionRef}
       className={`${className} ${textColorClass}`}
     >
       {children}
