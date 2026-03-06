@@ -198,14 +198,14 @@ export function CarUploadForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 rounded-2xl bg-white p-4 text-sm shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-950 dark:ring-zinc-800"
+      className="space-y-4 rounded-2xl border border-slate-800/80 bg-slate-950/80 p-4 text-sm shadow-[0_0_32px_rgba(15,23,42,0.9)] backdrop-blur-xl"
     >
-      <h2 className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
+      <h2 className="text-base font-semibold tracking-tighter text-zinc-50">
         新增車輛（手機拍照 / 相簿上傳）
       </h2>
 
       <div className="space-y-1.5">
-        <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400">
+        <label className="block text-xs font-medium text-zinc-400">
           廠牌
         </label>
         <input
@@ -213,13 +213,13 @@ export function CarUploadForm() {
           value={brand}
           onChange={(e) => setBrand(e.target.value)}
           placeholder="例如：BMW 320i"
-          className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-3 text-sm text-zinc-900 outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+          className="w-full rounded-xl border border-slate-700 bg-black/40 px-3 py-3 text-sm text-zinc-100 outline-none ring-emerald-500/40 placeholder:text-zinc-500 focus:border-emerald-500 focus:ring-2"
         />
       </div>
 
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-1.5">
-          <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400">
+          <label className="block text-xs font-medium text-zinc-400">
             年份
           </label>
           <input
@@ -228,11 +228,11 @@ export function CarUploadForm() {
             value={year}
             onChange={(e) => setYear(e.target.value)}
             placeholder="例如：2020"
-            className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-3 text-sm text-zinc-900 outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+            className="w-full rounded-xl border border-slate-700 bg-black/40 px-3 py-3 text-sm text-zinc-100 outline-none ring-emerald-500/40 placeholder:text-zinc-500 focus:border-emerald-500 focus:ring-2"
           />
         </div>
         <div className="space-y-1.5">
-          <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400">
+          <label className="block text-xs font-medium text-zinc-400">
             里程（km）
           </label>
           <input
@@ -241,13 +241,13 @@ export function CarUploadForm() {
             value={mileage}
             onChange={(e) => setMileage(e.target.value)}
             placeholder="例如：25000"
-            className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-3 text-sm text-zinc-900 outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+            className="w-full rounded-xl border border-slate-700 bg-black/40 px-3 py-3 text-sm text-zinc-100 outline-none ring-emerald-500/40 placeholder:text-zinc-500 focus:border-emerald-500 focus:ring-2"
           />
         </div>
       </div>
 
       <div className="space-y-1.5">
-        <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400">
+        <label className="block text-xs font-medium text-zinc-400">
           價格（NT$）
         </label>
         <input
@@ -256,12 +256,12 @@ export function CarUploadForm() {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
           placeholder="例如：1680000"
-          className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-3 text-sm text-zinc-900 outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+          className="w-full rounded-xl border border-slate-700 bg-black/40 px-3 py-3 text-sm text-zinc-100 outline-none ring-emerald-500/40 placeholder:text-zinc-500 focus:border-emerald-500 focus:ring-2"
         />
       </div>
 
       <div className="space-y-1.5">
-        <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400">
+        <label className="block text-xs font-medium text-zinc-400">
           描述 / 備註
         </label>
         <textarea
@@ -269,17 +269,17 @@ export function CarUploadForm() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="例：車況良好、保養紀錄完整、無重大事故…"
-          className="w-full resize-none rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 outline-none ring-emerald-500/40 placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+          className="w-full resize-none rounded-xl border border-slate-700 bg-black/40 px-3 py-2 text-sm text-zinc-100 outline-none ring-emerald-500/40 placeholder:text-zinc-500 focus:border-emerald-500 focus:ring-2"
         />
       </div>
 
       <div className="space-y-1.5">
-        <label className="block text-xs font-medium text-zinc-600 dark:text-zinc-400">
+        <label className="block text-xs font-medium text-zinc-400">
           車輛照片（可多張）
         </label>
 
         {/* 手機快速拍照 */}
-        <label className="flex min-h-[52px] cursor-pointer items-center justify-center rounded-xl border border-dashed border-emerald-400 bg-emerald-50 text-sm font-medium text-emerald-700 transition hover:bg-emerald-100 dark:border-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-200 dark:hover:bg-emerald-900/60">
+        <label className="flex min-h-[52px] cursor-pointer items-center justify-center rounded-xl border border-dashed border-emerald-500/70 bg-emerald-500/10 text-sm font-medium text-emerald-200 transition hover:bg-emerald-500/20">
           ➊ 直接拍照上傳（建議拍外觀 / 內裝 / 里程表）
           <input
             type="file"
@@ -292,7 +292,7 @@ export function CarUploadForm() {
         </label>
 
         {/* 從相簿選擇 */}
-        <label className="mt-1 flex min-h-[44px] cursor-pointer items-center justify-center rounded-xl border border-dashed border-zinc-400 bg-zinc-50 text-xs font-medium text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800">
+        <label className="mt-1 flex min-h-[44px] cursor-pointer items-center justify-center rounded-xl border border-dashed border-slate-700 bg-black/40 text-xs font-medium text-zinc-200 transition hover:bg-slate-900">
           ➋ 從手機相簿選擇照片
           <input
             type="file"
@@ -303,11 +303,11 @@ export function CarUploadForm() {
           />
         </label>
         {files.length > 0 && (
-          <p className="text-xs text-zinc-500 dark:text-zinc-400">
+          <p className="text-xs text-zinc-400">
             已選擇 {files.length} 張照片
           </p>
         )}
-        <p className="text-[11px] text-zinc-400 dark:text-zinc-500">
+        <p className="text-[11px] text-zinc-500">
           小撇步：在車旁直接點擊上方按鈕，用手機拍照，上傳時保持網路連線穩定即可。
         </p>
       </div>
@@ -315,14 +315,14 @@ export function CarUploadForm() {
       {uploadState.isUploading && (
         <div className="space-y-1.5">
           <div className="flex items-center justify-between text-xs">
-            <span className="text-zinc-600 dark:text-zinc-300">
+            <span className="text-zinc-400">
               上傳中…
             </span>
-            <span className="font-medium text-emerald-600 dark:text-emerald-300">
+            <span className="font-medium text-emerald-400">
               {uploadState.progress}%
             </span>
           </div>
-          <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
+          <div className="h-2 w-full overflow-hidden rounded-full bg-slate-900">
             <div
               className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-sky-500 transition-[width]"
               style={{ width: `${uploadState.progress}%` }}
@@ -335,7 +335,7 @@ export function CarUploadForm() {
         <p className="text-xs text-red-500">{uploadState.error}</p>
       )}
       {uploadState.success && (
-        <p className="text-xs text-emerald-600 dark:text-emerald-300">
+        <p className="text-xs text-emerald-400">
           {uploadState.success}
         </p>
       )}
@@ -343,12 +343,12 @@ export function CarUploadForm() {
       <button
         type="submit"
         disabled={uploadState.isUploading}
-        className="flex h-12 w-full items-center justify-center rounded-full bg-zinc-900 text-sm font-medium text-white shadow-sm transition hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white"
+        className="flex h-12 w-full items-center justify-center rounded-full bg-emerald-500 text-sm font-semibold tracking-[0.18em] text-zinc-950 shadow-[0_0_24px_rgba(16,185,129,0.7)] transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {uploadState.isUploading ? "上傳中…" : "➋ 上傳並建立車輛"}
       </button>
 
-      <p className="text-[11px] text-zinc-400 dark:text-zinc-500">
+      <p className="text-[11px] text-zinc-500">
         建議在展間現場：先把車開到光線好的地方 → 拍攝外觀、內裝、里程表 →
         直接在此表單上傳與建檔，避免事後補資料遺漏。
       </p>

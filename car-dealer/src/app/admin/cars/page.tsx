@@ -7,7 +7,9 @@ export default function AdminCarsPage() {
         <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-emerald-400">
           Inventory
         </p>
-        <h2 className="text-lg font-semibold">車輛建檔</h2>
+        <h2 className="text-lg font-semibold tracking-tighter text-zinc-50">
+          車輛建檔
+        </h2>
         <p className="text-xs text-zinc-400">
           建議在車輛旁直接用手機開啟這個頁面，拍照後立即上傳與建檔，避免事後遺漏。
         </p>

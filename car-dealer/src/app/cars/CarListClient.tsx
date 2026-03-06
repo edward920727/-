@@ -145,18 +145,18 @@ export default function CarListClient() {
   return (
     <div className="space-y-6">
       <header className="space-y-3">
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-300">
+        <p className="text-xs font-medium uppercase tracking-[0.2em] text-emerald-400">
           Inventory
         </p>
-        <h1 className="text-2xl font-semibold tracking-tight text-zinc-900 md:text-3xl dark:text-zinc-50">
+        <h1 className="text-2xl font-semibold tracking-tighter text-zinc-50 md:text-3xl">
           車輛列表
         </h1>
-        <p className="max-w-2xl text-sm text-zinc-600 dark:text-zinc-400 md:text-base">
+        <p className="max-w-2xl text-sm text-zinc-400 md:text-base">
           目前展示中的精選車輛，皆附完整車況鑑定與里程保證。歡迎預約賞車或來電詢問最新優惠。
         </p>
       </header>
 
-      <section className="space-y-4 rounded-2xl bg-white/80 p-4 ring-1 ring-zinc-200 dark:bg-zinc-950/80 dark:ring-zinc-800">
+      <section className="space-y-4 rounded-2xl border border-slate-800/80 bg-slate-950/80 p-4 shadow-[0_0_32px_rgba(15,23,42,0.9)]">
         <div className="flex flex-col gap-3 text-xs md:flex-row md:items-center md:justify-between md:text-sm">
           {/* 篩選標籤 */}
           <div className="inline-flex flex-wrap gap-2">
@@ -169,8 +169,8 @@ export default function CarListClient() {
                   onClick={() => setActiveFilter(f.key)}
                   className={`rounded-full border px-3 py-1.5 transition ${
                     active
-                      ? "border-emerald-500 bg-emerald-500 text-white shadow-sm dark:border-emerald-400"
-                      : "border-zinc-200 text-zinc-600 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900"
+                      ? "border-emerald-500 bg-emerald-500 text-white shadow-sm"
+                      : "border-slate-700 text-zinc-400 hover:bg-slate-900"
                   }`}
                 >
                   {f.label}
@@ -182,22 +182,22 @@ export default function CarListClient() {
           {/* 搜尋 + 排序 */}
           <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
             <div className="flex items-center gap-2">
-              <span className="hidden text-xs text-zinc-500 dark:text-zinc-400 md:inline">
+              <span className="hidden text-xs text-zinc-500 md:inline">
                 搜尋：
               </span>
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="輸入廠牌或車款，例如：BMW、Model 3"
-                className="w-full rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-xs text-zinc-800 outline-none placeholder:text-zinc-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
+                className="w-full rounded-full border border-slate-700 bg-slate-900 px-3 py-1.5 text-xs text-zinc-100 outline-none placeholder:text-zinc-500 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/30"
               />
             </div>
-            <div className="flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
+            <div className="flex items-center gap-2 text-xs text-zinc-500">
               <span>排序：</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
-                className="rounded-full border border-zinc-200 bg-white px-2 py-1 text-xs dark:border-zinc-700 dark:bg-zinc-900"
+                className="rounded-full border border-slate-700 bg-slate-900 px-2 py-1 text-xs text-zinc-100"
               >
                 <option value="price-asc">價格（由低到高）</option>
                 <option value="price-desc">價格（由高到低）</option>
@@ -211,16 +211,23 @@ export default function CarListClient() {
 
       <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {loading && filteredCars.length === 0 ? (
-          <p className="col-span-full text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="col-span-full text-sm text-zinc-500">
             車輛載入中…
           </p>
         ) : filteredCars.length === 0 ? (
-          <p className="col-span-full text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="col-span-full text-sm text-zinc-500">
             找不到符合條件的車輛，請調整搜尋關鍵字或篩選條件。
             {error && <span className="block pt-1 text-xs text-red-400">{error}</span>}
           </p>
         ) : (
-          filteredCars.map((car) => <CarCard key={car.id} car={car} />)
+          filteredCars.map((car, index) => (
+            <div
+              key={car.id}
+              style={{ "--stagger-index": index } as React.CSSProperties}
+            >
+              <CarCard car={car} />
+            </div>
+          ))
         )}
       </section>
     </div>
